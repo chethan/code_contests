@@ -1,0 +1,9 @@
+*.iml
+*.iws
+*.ipr
+target
+build
+.gradle
+.idea
+
+src/test/java/com/yahoo/tns/yapee/grid/pigunit/generated
