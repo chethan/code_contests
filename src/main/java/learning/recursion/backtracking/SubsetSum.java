@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by Chethan on 8/24/15.
+ * http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/
  */
 public class SubsetSum {
     public List<Integer> findSubset(List<Integer> number,Integer sum){
