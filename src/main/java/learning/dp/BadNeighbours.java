@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Created by Chethan on 9/15/15.
  */
 //D[i]=max{D[i-2]+a[i],D[i-3]+a[i-1]}
-//http://community.topcoder.com/tc?module=ProblemDetail&rd=5009&pm=2402
+//http://community.topcoder.com/stat?c=problem_statement&pm=2402&rd=5009
 public class BadNeighbours {
 
     public int maxDonationCircular(int[] donations) {
