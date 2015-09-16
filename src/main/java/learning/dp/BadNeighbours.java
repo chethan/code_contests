@@ -33,7 +33,10 @@ public class BadNeighbours {
     }
 
     private void printUsingDpTable(int[] dp, int value, int[] donations) {
-        if (value < 0) return;
+        if (value < 0) {
+            System.out.println();
+            return;
+        }
         printUsingDpTable(dp, dp[value], donations);
         if (value - dp[value] != 1) {
             System.out.print(donations[value] + " ");
