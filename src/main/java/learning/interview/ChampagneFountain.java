@@ -4,7 +4,7 @@ package learning.interview;
  * Created by Chethan on 9/19/15.
  */
 //http://programmers.stackexchange.com/questions/184994/champaign-fountain-puzzle
-public class CChampagneFountain {
+public class ChampagneFountain {
     public double getChampagneIn(int quantity, int number) {
         int glassNumber = 1;
         double[] champagneIn = new double[number + 1];
