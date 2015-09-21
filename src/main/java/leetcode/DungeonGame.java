@@ -4,7 +4,6 @@ package leetcode;
  * Created by Chethan on 9/21/15.
  */
 // https://leetcode.com/problems/dungeon-game/
-//H[m,n]=max{M[m-1][n],M[n-1][m]}+A[m][n]
 public class DungeonGame {
     public int calculateMinimumHP(int[][] dungeon) {
         int width = dungeon[0].length;
