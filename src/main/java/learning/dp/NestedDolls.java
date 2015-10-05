@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Chethan on 10/4/15.
  */
-//
+//http://www.spoj.com/problems/MDOLLS/en/
 public class NestedDolls {
     public int minimumDolls(Tuple<Integer>[] dimensions) {
         int minimumDolls = dimensions.length;
