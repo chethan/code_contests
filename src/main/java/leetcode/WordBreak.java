@@ -8,6 +8,7 @@ import java.util.Set;
  * Created by Chethan on 10/14/15.
  */
 public class WordBreak {
+    //https://leetcode.com/problems/word-break/
     public boolean wordBreakOne(String s, Set<String> wordDict) {
         int length = s.length();
         boolean[] dp = new boolean[length + 1];
@@ -24,6 +25,7 @@ public class WordBreak {
         return dp[length];
     }
 
+    //https://leetcode.com/problems/word-break-ii/
     public List<String> wordBreakTwo(String s, Set<String> wordDict) {
         int length = s.length();
         List<String>[] dp = new ArrayList[length + 1];
