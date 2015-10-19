@@ -68,4 +68,25 @@ public class BuySellStocks {
     }
 
 
+    //https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/
+    //TODO: need to understand it better
+    public int maxProfit3(int k, int[] prices) {
+        int len = prices.length;
+        if (len < 2 || k <= 0)
+            return 0;
+        int[][] local = new int[len][k + 1];
+        int[][] global = new int[len][k + 1];
+
+        for (int i = 1; i < prices.length; i++) {
+            int diff = prices[i] - prices[i - 1];
+            for (int j = 1; j <=k; j++) {
+                local[i][j] = Math.max(global[i - 1][j - 1] + Math.max(diff, 0), local[i - 1][j] + diff);
+                global[i][j] = Math.max(local[i][j], global[i - 1][j]);
+            }
+        }
+        return global[prices.length - 1][k];
+
+    }
+
+
 }

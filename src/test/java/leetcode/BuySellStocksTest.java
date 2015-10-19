@@ -16,5 +16,8 @@ public class BuySellStocksTest {
         assertThat(buySellStocks.maxProfit1(new int[]{10, 100, 1, 5, 7, 88})).isEqualTo(177);
         assertThat(buySellStocks.maxProfit2(new int[]{1, 4, 5, 7, 6, 3, 2, 9})).isEqualTo(13);
         assertThat(buySellStocks.maxProfit2Faster(new int[]{1, 4, 5, 7, 6, 3, 2, 9})).isEqualTo(13);
+        assertThat(buySellStocks.maxProfit3(2, new int[]{1, 4, 5, 7, 6, 3, 2, 9})).isEqualTo(13);
+        assertThat(buySellStocks.maxProfit3(6, new int[]{10, 100, 1, 5, 7, 88})).isEqualTo(177);
+        assertThat(buySellStocks.maxProfit3(1, new int[]{10, 100, 1, 5, 7, 88})).isEqualTo(90);
     }
 }
