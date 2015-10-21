@@ -1,4 +1,4 @@
-package learning.dp;
+package ds;
 
 /**
  * Created by Chethan on 10/4/15.

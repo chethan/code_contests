@@ -1,6 +1,6 @@
 package leetcode;
 
-import learning.dp.Tuple;
+import ds.Tuple;
 
 import java.util.Stack;
 
