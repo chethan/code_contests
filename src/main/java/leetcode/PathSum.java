@@ -31,6 +31,34 @@ public class PathSum {
     }
 
 
+    //https://leetcode.com/problems/sum-root-to-leaf-numbers/
+    public int sumNumbers(TreeNode root) {
+        int sum = 0;
+        List<String> numbers = getNumbers(root);
+        for (String number : numbers) {
+            int decimalNumber = 0;
+            char[] chars = number.toCharArray();
+            for (char aChar : chars) {
+                decimalNumber = decimalNumber*10+Character.getNumericValue(aChar);
+            }
+            sum += decimalNumber;
+        }
+        return sum;
+    }
+
+    private List<String> getNumbers(TreeNode root) {
+        ArrayList<String> paths = new ArrayList<>();
+        if (root == null) return paths;
+        List<String> strings = getNumbers(root.left);
+        strings.addAll(getNumbers(root.right));
+        if (strings.size() == 0) paths.add(root.val + "");
+        for (String string : strings) {
+            paths.add(root.val + string);
+        }
+        return paths;
+    }
+
+
     //https://leetcode.com/problems/path-sum-ii/
     public List<List<Integer>> binaryTreePathSums(TreeNode root, int sum) {
         ArrayList<List<Integer>> paths = new ArrayList<>();

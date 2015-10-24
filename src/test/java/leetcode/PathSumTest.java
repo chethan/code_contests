@@ -33,7 +33,21 @@ public class PathSumTest {
                 right(TreeNode.builder().val(20).
                         left(TreeNode.builder().val(15).build()).
                         right(TreeNode.builder().val(7).build()).build()).build();
-        assertThat(pathSum.binaryTreePaths(tree)).containsSequence("3->9","3->20->15","3->20->7");
+        assertThat(pathSum.binaryTreePaths(tree)).containsSequence("3->9", "3->20->15", "3->20->7");
+    }
+
+    @Test
+    public void testSumNumbers(){
+        PathSum pathSum = new PathSum();
+        TreeNode tree = TreeNode.builder().val(6).
+                left(TreeNode.builder().val(2).
+                        left(TreeNode.builder().val(0).build()).
+                        right(TreeNode.builder().val(4).build()).build()).
+                right(TreeNode.builder().val(8).
+                        left(TreeNode.builder().val(7).build()).
+                        right(TreeNode.builder().val(9).build()).
+                        build()).build();
+        assertThat(pathSum.sumNumbers(tree)).isEqualTo(2620);
 
     }
 }
