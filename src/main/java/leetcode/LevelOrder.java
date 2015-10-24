@@ -53,4 +53,32 @@ public class LevelOrder {
 
         return bottomUpValues;
     }
+
+    //https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+    public List<List<Integer>> zigzagTraversal(TreeNode root) {
+        Deque<TreeNode> queue = new ArrayDeque<>();
+        List<List<Integer>> values = new ArrayList<>();
+        boolean isRightDirection = true;
+        if (root != null) queue.add(root);
+        while (!queue.isEmpty()) {
+            isRightDirection = !isRightDirection;
+            ArrayList<Integer> integers = new ArrayList<>();
+            Deque<TreeNode> tempQueue = new ArrayDeque<>();
+            while (!queue.isEmpty()) {
+                TreeNode treeNode = queue.pollLast();
+                integers.add(treeNode.val);
+                if (isRightDirection) {
+                    if (treeNode.right != null) tempQueue.add(treeNode.right);
+                    if (treeNode.left != null) tempQueue.add(treeNode.left);
+                } else {
+                    if (treeNode.left != null) tempQueue.add(treeNode.left);
+                    if (treeNode.right != null) tempQueue.add(treeNode.right);
+                }
+            }
+            queue = tempQueue;
+            values.add(integers);
+        }
+        return values;
+
+    }
 }
