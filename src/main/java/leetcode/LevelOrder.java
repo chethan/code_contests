@@ -79,6 +79,32 @@ public class LevelOrder {
             values.add(integers);
         }
         return values;
-
     }
+
+    //https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
+    public void connect(TreeLinkNode root) {
+        Queue<TreeLinkNode> queue = new LinkedList<>();
+        if (root != null) queue.add(root);
+        while (!queue.isEmpty()) {
+            Queue<TreeLinkNode> tempQueue = new LinkedList<>();
+            while (!queue.isEmpty()) {
+                TreeLinkNode poll = queue.poll();
+                if (!queue.isEmpty()) poll.next = queue.peek();
+                if (poll.left != null) tempQueue.add(poll.left);
+                if (poll.right != null) tempQueue.add(poll.right);
+            }
+            queue = tempQueue;
+        }
+    }
+
+
+    public static class TreeLinkNode {
+        public TreeLinkNode(int val) {
+            this.val = val;
+        }
+
+        public int val;
+        public TreeLinkNode left, right, next;
+    }
+
 }

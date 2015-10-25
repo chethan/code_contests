@@ -49,4 +49,16 @@ public class LevelOrderTest {
         assertThat(levelOrder.zigzagTraversal(tree)).containsSequence(Arrays.asList(1), Arrays.asList(3, 2), Arrays.asList(4, 5));
         assertThat(levelOrder.traverseFromBottom(null)).isEmpty();
     }
+
+    @Test
+    public void testConnect(){
+        LevelOrder levelOrder = new LevelOrder();
+        LevelOrder.TreeLinkNode treeLinkNode = new LevelOrder.TreeLinkNode(1);
+        treeLinkNode.left=new LevelOrder.TreeLinkNode(2);
+        treeLinkNode.right=new LevelOrder.TreeLinkNode(3);
+        levelOrder.connect(treeLinkNode);
+        assertThat(treeLinkNode.next).isNull();
+        assertThat(treeLinkNode.left.next).isSameAs(treeLinkNode.right);
+        assertThat(treeLinkNode.right.next).isNull();
+    }
 }
