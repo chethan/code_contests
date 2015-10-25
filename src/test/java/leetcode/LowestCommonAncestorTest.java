@@ -26,4 +26,23 @@ public class LowestCommonAncestorTest {
         assertThat(lowestCommonAncestor.lowestCommonAncestorBST(tree,TreeNode.builder().val(0).build(),
                 TreeNode.builder().val(9).build() ).val).isEqualTo(6);
     }
+
+    @Test
+    public void testLowestCommonAncestor() throws Exception {
+        TreeNode tree = TreeNode.builder().val(6).
+                left(TreeNode.builder().val(2).
+                        left(TreeNode.builder().val(0).build()).
+                        right(TreeNode.builder().val(4).build()).build()).
+                right(TreeNode.builder().val(8).
+                        left(TreeNode.builder().val(7).build()).
+                        right(TreeNode.builder().val(9).build()).
+                        build()).build();
+
+
+        LowestCommonAncestor lowestCommonAncestor = new LowestCommonAncestor();
+        assertThat(lowestCommonAncestor.lowestCommonAncestor(tree,TreeNode.builder().val(0).build(),
+                TreeNode.builder().val(9).build() ).val).isEqualTo(6);
+        assertThat(lowestCommonAncestor.lowestCommonAncestorIterative(tree, TreeNode.builder().val(0).build(),
+                TreeNode.builder().val(9).build() ).val).isEqualTo(6);
+    }
 }
