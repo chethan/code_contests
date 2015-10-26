@@ -31,6 +31,16 @@ public class BinarySearchTreeTest {
         assertThat(binarySearchTree.kthSmallest(getBST(),3)).isEqualTo(4);
     }
 
+    @Test
+    public void testSortedArrayToBST() throws Exception {
+        InOrder inOrder = new InOrder();
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        TreeNode treeNode = binarySearchTree.sortedArrayToBST(new int[]{1, 2, 3, 4});
+        assertThat(inOrder.traverse(treeNode)).containsSequence(1,2,3,4);
+    }
+
+
+
     private TreeNode getBST() {
         return TreeNode.builder().val(6).
                     left(TreeNode.builder().val(2).
@@ -41,6 +51,4 @@ public class BinarySearchTreeTest {
                             right(TreeNode.builder().val(9).build()).
                             build()).build();
     }
-
-
 }

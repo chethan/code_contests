@@ -2,6 +2,7 @@ package leetcode;
 
 import ds.TreeNode;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -40,5 +41,19 @@ public class BinarySearchTree {
         }
         return 0;
     }
+
+    //https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+    public TreeNode sortedArrayToBST(int[] nums) {
+        if (nums == null || nums.length == 0) return null;
+        int length = nums.length;
+        int i = length / 2;
+        TreeNode node = new TreeNode(nums[i]);
+        if (length > 1) {
+            if (i > 0) node.left = sortedArrayToBST(Arrays.copyOfRange(nums, 0, i));
+            if (i < length - 1) node.right = sortedArrayToBST(Arrays.copyOfRange(nums, i + 1, length));
+        }
+        return node;
+    }
+
 
 }
