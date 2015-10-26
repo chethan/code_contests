@@ -13,14 +13,7 @@ public class BinarySearchTreeTest {
     @Test
     public void testIsValidBST() throws Exception {
         BinarySearchTree binarySearchTree = new BinarySearchTree();
-        TreeNode tree = TreeNode.builder().val(6).
-                left(TreeNode.builder().val(2).
-                        left(TreeNode.builder().val(0).build()).
-                        right(TreeNode.builder().val(4).build()).build()).
-                right(TreeNode.builder().val(8).
-                        left(TreeNode.builder().val(7).build()).
-                        right(TreeNode.builder().val(9).build()).
-                        build()).build();
+        TreeNode tree = getBST();
         assertThat(binarySearchTree.isValidBST(tree)).isTrue();
 
         tree=TreeNode.builder().val(Integer.MIN_VALUE).
@@ -31,4 +24,23 @@ public class BinarySearchTreeTest {
         tree=TreeNode.builder().val(Integer.MAX_VALUE).build();
         assertThat(binarySearchTree.isValidBST(tree)).isTrue();
     }
+
+    @Test
+    public void testKthSmallestElement(){
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        assertThat(binarySearchTree.kthSmallest(getBST(),3)).isEqualTo(4);
+    }
+
+    private TreeNode getBST() {
+        return TreeNode.builder().val(6).
+                    left(TreeNode.builder().val(2).
+                            left(TreeNode.builder().val(0).build()).
+                            right(TreeNode.builder().val(4).build()).build()).
+                    right(TreeNode.builder().val(8).
+                            left(TreeNode.builder().val(7).build()).
+                            right(TreeNode.builder().val(9).build()).
+                            build()).build();
+    }
+
+
 }

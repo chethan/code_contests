@@ -2,6 +2,8 @@ package leetcode;
 
 import ds.TreeNode;
 
+import java.util.Stack;
+
 /**
  * Created by Chethan on 10/24/15.
  */
@@ -11,7 +13,7 @@ public class BinarySearchTree {
         return root == null || isValidBSTRecursive(root, null, null);
     }
 
-    public boolean isValidBSTRecursive(TreeNode root, Integer min, Integer max) {
+    private boolean isValidBSTRecursive(TreeNode root, Integer min, Integer max) {
         if ((min != null && root.val <= min)
                 || (max != null && root.val >= max)) return false;
         boolean isLeftBST = root.left == null ||
@@ -20,4 +22,23 @@ public class BinarySearchTree {
                 root.right.val > root.val && isValidBSTRecursive(root.right, root.val, max);
         return isLeftBST && isrightBST;
     }
+
+    //https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> nodes = new Stack<>();
+        TreeNode loopNode = root;
+        while (!nodes.isEmpty() || loopNode != null) {
+            if (loopNode != null) {
+                nodes.push(loopNode);
+                loopNode = loopNode.left;
+            } else if (!nodes.isEmpty()) {
+                TreeNode pop = nodes.pop();
+                k--;
+                if (k == 0) return pop.val;
+                loopNode = pop.right;
+            }
+        }
+        return 0;
+    }
+
 }
