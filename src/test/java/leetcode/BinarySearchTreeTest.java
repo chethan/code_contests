@@ -41,6 +41,12 @@ public class BinarySearchTreeTest {
 
 
 
+    @Test
+    public void testClosestValue() throws Exception {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        assertThat(binarySearchTree.closestValue(getBST(),8.8)).isEqualTo(9);
+    }
+
     private TreeNode getBST() {
         return TreeNode.builder().val(6).
                     left(TreeNode.builder().val(2).

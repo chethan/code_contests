@@ -55,5 +55,19 @@ public class BinarySearchTree {
         return node;
     }
 
+    //https://leetcode.com/problems/closest-binary-search-tree-value/
+    public int closestValue(TreeNode root,double target){
+        int returnValue=Integer.MAX_VALUE;
+        TreeNode loopnode=root;
+        while (loopnode!=null){
+            if(Math.abs(target-loopnode.val) < Math.abs(target-returnValue)){
+                returnValue = loopnode.val;
+            }
+            loopnode=target>loopnode.val?loopnode.right:loopnode.left;
+        }
+        return returnValue;
+    }
+
+
 
 }
