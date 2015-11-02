@@ -56,18 +56,34 @@ public class BinarySearchTree {
     }
 
     //https://leetcode.com/problems/closest-binary-search-tree-value/
-    public int closestValue(TreeNode root,double target){
-        int returnValue=Integer.MAX_VALUE;
-        TreeNode loopnode=root;
-        while (loopnode!=null){
-            if(Math.abs(target-loopnode.val) < Math.abs(target-returnValue)){
+    public int closestValue(TreeNode root, double target) {
+        int returnValue = Integer.MAX_VALUE;
+        TreeNode loopnode = root;
+        while (loopnode != null) {
+            if (Math.abs(target - loopnode.val) < Math.abs(target - returnValue)) {
                 returnValue = loopnode.val;
             }
-            loopnode=target>loopnode.val?loopnode.right:loopnode.left;
+            loopnode = target > loopnode.val ? loopnode.right : loopnode.left;
         }
         return returnValue;
     }
 
+    //https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/
+    public boolean verifyPreorder(int[] preorder) {
+        if (preorder == null || preorder.length == 0) return true;
+        return verifyPreorderRecursive(preorder, 0, preorder.length - 1);
+    }
+
+    private boolean verifyPreorderRecursive(int[] preorder, int low, int high) {
+        if (low >= high) return true;
+        int root = preorder[low],leftTree = low + 1;
+        while (leftTree <= high && preorder[leftTree] < root) leftTree++;
+        int rightTree = leftTree;
+        while (rightTree <= high && preorder[leftTree] > root) rightTree++;
+        if (rightTree <= high) return false;
+        return verifyPreorderRecursive(preorder, low + 1, leftTree - 1) &&
+                verifyPreorderRecursive(preorder, leftTree, high);
+    }
 
 
 }
