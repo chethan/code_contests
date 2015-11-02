@@ -14,4 +14,11 @@ public class UniqueBinarySearchTreesTest {
         UniqueBinarySearchTrees uniqueBinarySearchTrees = new UniqueBinarySearchTrees();
         assertThat(uniqueBinarySearchTrees.numTrees(3)).isEqualTo(5);
     }
+
+    @Test
+    public void testGenerateTrees() throws Exception {
+        UniqueBinarySearchTrees uniqueBinarySearchTrees = new UniqueBinarySearchTrees();
+        assertThat(uniqueBinarySearchTrees.generateTrees(3)).hasSize(5);
+
+    }
 }
