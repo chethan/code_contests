@@ -18,20 +18,14 @@ public class ReversingList {
 
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;
-        ListNode next = null;
+        ListNode previous = null;
         ListNode current = head;
-        ListNode previous = head.next;
-        while (previous != null) {
-
-            ListNode tempNode = previous.next;
-
-            current.next = next;
-            previous.next = current;
-
-            next = current;
-            current = previous;
-            previous = tempNode;
+        while (current!= null) {
+            ListNode tempNode = current.next;
+            current.next = previous;
+            previous = current;
+            current = tempNode;
         }
-        return current;
+        return previous;
     }
 }
