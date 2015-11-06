@@ -30,4 +30,13 @@ public class NodeDeletionTest {
         assertThat(nodeDeletion.removeElements(ListNode.from(1, 2, 2, 1), 2).toArray()).
                 containsExactly( 1,1);
     }
+
+    @Test
+    public void testDeleteNode() throws Exception {
+        NodeDeletion nodeDeletion = new NodeDeletion();
+        ListNode head = ListNode.from(1, 2, 6, 3, 4, 5, 6);
+        nodeDeletion.deleteNode(head.next.next);
+        assertThat(head.toArray()).containsExactly(1, 2, 3, 4, 5,6);
+
+    }
 }
