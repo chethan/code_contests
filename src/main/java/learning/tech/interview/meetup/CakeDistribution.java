@@ -5,6 +5,7 @@ import java.util.Arrays;
 /**
  * Created by Chethan on 3/19/16.
  */
+//https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3249
 public class CakeDistribution {
 
     public double maximumSlice(int[] cakeVolumes, double slices) {
@@ -14,7 +15,7 @@ public class CakeDistribution {
         while (true) {
             mid = (min + max) / 2;
             int totalSlices = getTotalSlices(cakeVolumes, mid);
-            if (totalSlices == slices && (max - min) <= 0) return mid;
+            if (totalSlices == slices && (max - min) <= 0.0001) return  Math.round (mid * 1000.0) / 1000.0;;
             if (totalSlices >= slices) min = mid;
             else max = mid;
         }
