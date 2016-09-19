@@ -12,7 +12,6 @@ public abstract class BadVersionFinder {
         boolean isBadVersion;
         do {
             myGuess = (low + high) / 2;
-            System.out.println(low + "," + high + "," + myGuess);
             isBadVersion = isBadVersion((int) myGuess);
             if (isBadVersion) high = myGuess - 1;
             else low = myGuess + 1;
