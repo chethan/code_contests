@@ -3,6 +3,7 @@ package leetcode;
 /**
  * Created by Chethan on 9/18/16.
  */
+//https://leetcode.com/problems/guess-number-higher-or-lower/
 public abstract class NumberGuesser {
     public int guessNumber(int n) {
         long low = 0, high = n, myGuess, isCorrect;

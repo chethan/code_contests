@@ -5,6 +5,7 @@ package leetcode;
  */
 //dp[i][j]: minimum number of money to guarantee win for subproblem [i, j].
 //dp[i][j] = min{k + max{dp[i][k-1]+dp[k+1][j]}} for all i<=k<=j
+//https://leetcode.com/problems/guess-number-higher-or-lower-ii/
 public class NumberGuesser2 {
     public int getMoneyAmount(int n) {
         if (n <= 1) return 0;
