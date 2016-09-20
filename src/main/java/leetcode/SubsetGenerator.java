@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Chethan on 9/19/16.
  */
+//https://leetcode.com/problems/subsets/
 public class SubsetGenerator {
     public List<List<Integer>> subsets(int[] nums) {
         if (nums.length == 0) {
