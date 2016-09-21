@@ -16,9 +16,9 @@ public class TwoSum {
         }
         for (int i = 0; i < nums.length; i++) {
             int difference = target - nums[i];
-            if (map.containsKey(difference) && (map.get(difference)!=i)) {
-                result[1] = map.get(difference)+1;
-                result[0] = i + 1;
+            if (map.containsKey(difference) && (map.get(difference) != i)) {
+                result[1] = map.get(difference);
+                result[0] = i;
                 break;
             }
         }
