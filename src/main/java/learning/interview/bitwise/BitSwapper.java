@@ -1,4 +1,4 @@
-package learning.interview.primitives;
+package learning.interview.bitwise;
 
 class BitSwapper {
     int swapBits(int num, int i, int j) {

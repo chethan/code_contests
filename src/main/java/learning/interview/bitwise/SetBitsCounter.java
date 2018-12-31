@@ -1,4 +1,4 @@
-package learning.interview.primitives;
+package learning.interview.bitwise;
 
 class SetBitsCounter {
     int countIterative(int number) {

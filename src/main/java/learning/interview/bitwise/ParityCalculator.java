@@ -1,4 +1,4 @@
-package learning.interview.primitives;
+package learning.interview.bitwise;
 class ParityCalculator{
 	int parity(long number){
 		int result = 0;

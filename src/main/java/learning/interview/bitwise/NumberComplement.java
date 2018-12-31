@@ -1,4 +1,4 @@
-package learning.interview.primitives;
+package learning.interview.bitwise;
 
 public class NumberComplement {
     //https://leetcode.com/problems/number-complement

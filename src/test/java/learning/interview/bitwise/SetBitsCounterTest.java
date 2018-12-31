@@ -1,4 +1,4 @@
-package learning.interview.primitives;
+package learning.interview.bitwise;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
