@@ -5,5 +5,7 @@ target
 build
 .gradle
 .idea
+.DS_Store
+out
 
 src/test/java/com/yahoo/tns/yapee/grid/pigunit/generated
