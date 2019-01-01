@@ -2,8 +2,32 @@ package learning.interview.bitwise;
 
 class BitwiseArithmetic {
 
+    //https://leetcode.com/problems/powx-n/
+    double pow(double x, int y) {
+        double result = 1;
+        if (x == 1) {
+            return result;
+        }
+        if (y < 0) {
+            x = (1 / x);
+            if (y == Integer.MIN_VALUE) {
+                result *= x;
+                y = Integer.MAX_VALUE;
+            } else {
+                y = -y;
+            }
+        }
+        for (; y != 0; y >>= 1) {
+            if ((y & 1) == 1) {
+                result *= x;
+            }
+            x *= x;
+        }
+        return result;
+    }
+
     int divide(int a, int b) {
-        if(b==0) return 0;
+        if (b == 0) return 0;
         int power = 32, quotient = 0;
         int bpow = b << power;
         while (a >= b) {

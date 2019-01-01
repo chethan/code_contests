@@ -48,4 +48,14 @@ public class BitwiseArithmeticTest {
         assertThat(bitwiseArithmetic.divide(43, 7)).isEqualTo(6);
         assertThat(bitwiseArithmetic.divide(7, 7)).isEqualTo(1);
     }
+
+    @Test
+    public void testPow() {
+        System.out.println(Integer.MAX_VALUE);
+        BitwiseArithmetic bitwiseArithmetic = new BitwiseArithmetic();
+        assertThat(bitwiseArithmetic.pow(1, Integer.MAX_VALUE)).isEqualTo(1);
+        assertThat(bitwiseArithmetic.pow(2, Integer.MIN_VALUE)).isEqualTo(0);
+        assertThat(bitwiseArithmetic.pow(2, 10)).isEqualTo(1024);
+        assertThat(bitwiseArithmetic.pow(2, -2)).isEqualTo(0.25);
+    }
 }
