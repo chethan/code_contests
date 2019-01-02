@@ -17,4 +17,15 @@ public class TitleConverterTest {
         assertThat(titleConverter.convertToTitle(52)).isEqualTo("AZ");
         assertThat(titleConverter.convertToTitle(53)).isEqualTo("BA");
     }
+
+    @Test
+    public void testConvertToColumnNumber() {
+        TitleConverter titleConverter = new TitleConverter();
+        assertThat(titleConverter.titleToNumber("AA")).isEqualTo(27);
+        assertThat(titleConverter.titleToNumber("AB")).isEqualTo(28);
+        assertThat(titleConverter.titleToNumber("B")).isEqualTo(2);
+        assertThat(titleConverter.titleToNumber("Z")).isEqualTo(26);
+        assertThat(titleConverter.titleToNumber("AZ")).isEqualTo(52);
+        assertThat(titleConverter.titleToNumber("BA")).isEqualTo(53);
+    }
 }

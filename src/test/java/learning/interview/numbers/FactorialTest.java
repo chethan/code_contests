@@ -10,6 +10,7 @@ public class FactorialTest {
     @Test
     public void testTrailingZeroes() {
         Factorial factorial = new Factorial();
+        System.out.println((Math.log(243)/Math.log(3)));
         assertThat(factorial.trailingZeroes(4617)).isEqualTo(1151);
         assertThat(factorial.trailingZeroes(30)).isEqualTo(7);
         assertThat(factorial.trailingZeroes(1808548329)).isEqualTo(452137076);

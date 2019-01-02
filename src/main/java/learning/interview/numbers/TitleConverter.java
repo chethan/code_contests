@@ -10,4 +10,14 @@ class TitleConverter {
         }
         return columnName.reverse().toString();
     }
+
+    //https://leetcode.com/problems/excel-sheet-column-number/
+    public int titleToNumber(String s) {
+        char[] chars = s.toCharArray();
+        int columnNumber = 0;
+        for (char aChar : chars) {
+            columnNumber = columnNumber * 26 + (aChar - 'A' + 1);
+        }
+        return columnNumber;
+    }
 }
