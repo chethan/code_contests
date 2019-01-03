@@ -1,4 +1,4 @@
-package leetcode;
+package learning.interview.arrays;
 
 import org.testng.annotations.Test;
 
