@@ -1,4 +1,4 @@
-package leetcode;
+package learning.interview.string;
 
 import ds.Tuple;
 
@@ -7,9 +7,9 @@ import java.util.Stack;
 /**
  * Created by Chethan on 10/15/15.
  */
-public class ValidParanthesis {
+class ValidParentheses {
     //https://leetcode.com/problems/valid-parentheses/
-    public boolean isValid(String s) {
+    boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
         char[] chars = s.toCharArray();
         for (char c : chars) {
@@ -26,23 +26,28 @@ public class ValidParanthesis {
     }
 
     //https://leetcode.com/problems/longest-valid-parentheses/
-    public int longestValidParentheses(String s) {
-        Stack<Tuple<Integer>> tuples = new Stack<>();
-        int longest = 0;
+    int longestValidParentheses(String s) {
+        //stack will finally have all the indicies for invalid values
+        Stack<Integer> stack = new Stack<>();
+
         char[] chars = s.toCharArray();
         for (int i = 0; i < chars.length; i++) {
             if (chars[i] == '(') {
-                tuples.push(new Tuple<>(i, 1));
+                stack.push(i);
             } else {
-                if (tuples.isEmpty() || tuples.peek().right == 0) {
-                    tuples.push(new Tuple<>(i, 0));
+                if (!stack.isEmpty() && chars[stack.peek()] == '(') {
+                    stack.pop();
                 } else {
-                    tuples.pop();
-                    int longestLocal = tuples.isEmpty() ? i + 1 : (i - tuples.peek().left);
-                    longest = Math.max(longestLocal, longest);
+                    stack.push(i);
                 }
             }
         }
-        return longest;
+        int to = chars.length, from = 0, longest = 0;
+        while (!stack.empty()) {
+            from = stack.pop();
+            longest = Math.max(longest, to - from - 1);
+            to = from;
+        }
+        return Math.max(longest, to);
     }
 }
