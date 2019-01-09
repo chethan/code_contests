@@ -36,7 +36,7 @@ class Anagrams {
 
     //one more ideas to use prime numbers to generate the key for hashmap, this will avoid sorting
     //https://leetcode.com/problems/group-anagrams/discuss/19183/Java-beat-100!!!-use-prime-number
-    //https://leetcode.com/problems/group-anagrams/
+        //https://leetcode.com/problems/group-anagrams/
     List<List<String>> groupAnagrams(String[] strs) {
         if (strs == null || strs.length == 0) return new ArrayList<>();
         Map<String, List<String>> map = new HashMap<>();
