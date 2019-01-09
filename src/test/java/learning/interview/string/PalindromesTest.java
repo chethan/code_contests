@@ -39,4 +39,30 @@ public class PalindromesTest {
         assertThat(palindromes.longestPalindromeDp("a")).isEqualTo("a");
         assertThat(palindromes.longestPalindromeDp("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth")).isEqualTo("ranynar");
     }
+
+    @Test
+    public void testCountSubstrings() {
+        Palindromes palindromes = new Palindromes();
+        assertThat(palindromes.countSubstrings("abc")).isEqualTo(3);
+        assertThat(palindromes.countSubstrings("aaa")).isEqualTo(6);
+    }
+    @Test
+    public void testCountSubstringsExtend() {
+        Palindromes palindromes = new Palindromes();
+        assertThat(palindromes.countSubstringsExtend("abc")).isEqualTo(3);
+        assertThat(palindromes.countSubstringsExtend("aaa")).isEqualTo(6);
+    }
+
+    @Test
+    public void testIsPalindromeOnlyAlphaNumeric(){
+        Palindromes palindromes = new Palindromes();
+        assertThat(palindromes.isPalindromeOnlyAlphaNumeric("A man, a plan, a canal: Panama")).isTrue();
+    }
+
+    @Test
+    public void testIsPalindromeAfterDeleting(){
+        Palindromes palindromes = new Palindromes();
+//        assertThat(palindromes.isPalindromeAfterDeleting("abca")).isTrue();
+        assertThat(palindromes.isPalindromeAfterDeleting("aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga")).isTrue();
+    }
 }
