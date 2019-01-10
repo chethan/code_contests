@@ -2,7 +2,7 @@ package learning.interview.string;
 
 class StringSearch {
 
-    private static final int MOD = 997;
+    private static final int MOD = 104729;
     private static final int RADIX = 256;
 
     //brute force
@@ -56,6 +56,49 @@ class StringSearch {
 
     }
 
+    //https://leetcode.com/problems/repeated-string-match
+    int repeatedStringMatch(String A, String B) {
+        if (A == null || A.length() == 0 || B == null) return 0;
+
+        int rm = 1;
+        for (int i = 0; i < B.length() - 1; ++i) {
+            rm = rm * RADIX % MOD;
+        }
+
+        long needleHash = getHash(B), currentHash = 0;
+        for (int count = 0, index = 0, repeatCount = 1; count <= B.length() * 2 || repeatCount < 3; index++, count++) {
+            if (index == A.length()) {
+                repeatCount++;
+                index = 0;
+            }
+            if (count < B.length()) {
+                currentHash = getHash(currentHash, A.charAt(index));
+            } else {
+                currentHash = deriveHash(currentHash,
+                        A.charAt((count - B.length()) % A.length()), A.charAt(index), rm);
+            }
+
+            if (currentHash == needleHash && checkEquality(generateHaystack(A, repeatCount), B, count - B.length()+1)) {
+                return repeatCount;
+            }
+        }
+
+        return -1;
+
+    }
+
+    private String generateHaystack(String a, int repeatCount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < repeatCount; i++) {
+            stringBuilder.append(a);
+        }
+        return stringBuilder.toString();
+    }
+
+    private long getHash(long currentHash, char newChar) {
+        return (currentHash * RADIX + newChar) % MOD;
+    }
+
     private long getHash(String str) {
         long hash = 0;
         for (int i = 0; i < str.length(); i++) {
@@ -70,6 +113,7 @@ class StringSearch {
     }
 
     private boolean checkEquality(String haystack, String needle, int startIndex) {
+        if(haystack.length()<needle.length()) return false;
         for (int i = 0; i < needle.length(); i++) {
             if (haystack.charAt(i + startIndex) != needle.charAt(i)) return false;
         }
