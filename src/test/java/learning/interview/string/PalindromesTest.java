@@ -2,6 +2,9 @@ package learning.interview.string;
 
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.*;
 
@@ -14,6 +17,7 @@ public class PalindromesTest {
         assertThat(palindromes.shortestPalindrome("abcda")).isEqualTo("adcbabcda");
         assertThat(palindromes.shortestPalindrome("aacecaaa")).isEqualTo("aaacecaaa");
     }
+
     @Test
     public void testShortestPalindromeRabinKarp() {
         Palindromes palindromes = new Palindromes();
@@ -46,6 +50,7 @@ public class PalindromesTest {
         assertThat(palindromes.countSubstrings("abc")).isEqualTo(3);
         assertThat(palindromes.countSubstrings("aaa")).isEqualTo(6);
     }
+
     @Test
     public void testCountSubstringsExtend() {
         Palindromes palindromes = new Palindromes();
@@ -54,15 +59,27 @@ public class PalindromesTest {
     }
 
     @Test
-    public void testIsPalindromeOnlyAlphaNumeric(){
+    public void testIsPalindromeOnlyAlphaNumeric() {
         Palindromes palindromes = new Palindromes();
         assertThat(palindromes.isPalindromeOnlyAlphaNumeric("A man, a plan, a canal: Panama")).isTrue();
     }
 
     @Test
-    public void testIsPalindromeAfterDeleting(){
+    public void testIsPalindromeAfterDeleting() {
         Palindromes palindromes = new Palindromes();
-//        assertThat(palindromes.isPalindromeAfterDeleting("abca")).isTrue();
+        assertThat(palindromes.isPalindromeAfterDeleting("abca")).isTrue();
         assertThat(palindromes.isPalindromeAfterDeleting("aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga")).isTrue();
+    }
+
+    @Test
+    public void testPalindromePairs() {
+        Palindromes palindromes = new Palindromes();
+        assertThat(palindromes.palindromePairs(new String[]{"abcd", "dcba", "lls", "s", "sssll"}))
+                .hasSize(4);
+        assertThat(palindromes.palindromePairs(new String[]{"bat","tab","cat"}))
+                .hasSize(2);
+        assertThat(palindromes.palindromePairs(new String[]{"a","b","c","ab","ac","aa"}))
+                .hasSize(6);
+
     }
 }

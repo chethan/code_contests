@@ -1,5 +1,6 @@
 package learning.interview.string;
 
+import java.util.*;
 import java.util.stream.IntStream;
 
 class Palindromes {
@@ -123,6 +124,56 @@ class Palindromes {
             }
         }
         return true;
+    }
+
+    //https://leetcode.com/problems/palindrome-pairs/
+    //https://leetcode.com/problems/palindrome-pairs/discuss/79210/The-Easy-to-unserstand-JAVA-Solution
+    List<List<Integer>> palindromePairs(String[] words) {
+        List<List<Integer>> pairs = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
+
+        if (words == null || words.length == 0) return pairs;
+
+        for (int i = 0; i < words.length; i++) {
+            map.put(words[i], i);
+        }
+
+        if (map.containsKey("")) {
+            int blankIdx = map.get("");
+            for (int i = 0; i < words.length; i++) {
+                if (i != blankIdx && isPalindrome(words[i])) {
+                    pairs.add(Arrays.asList(blankIdx, i));
+                    pairs.add(Arrays.asList(i, blankIdx));
+                }
+            }
+        }
+
+        for (int i = 0; i < words.length; i++) {
+            String reverse = new StringBuilder(words[i]).reverse().toString();
+            if (map.containsKey(reverse) && map.get(reverse) != i) {
+                pairs.add(Arrays.asList(i, map.get(reverse)));
+            }
+        }
+
+        for (int i = 0; i < words.length; i++) {
+            String cur = words[i];
+            for (int cut = 1; cut < cur.length(); cut++) {
+                String part1 = cur.substring(0, cut);
+                String part2 = cur.substring(cut);
+                String part2Reverse = new StringBuilder(part2).reverse().toString();
+                String part1Reverse = new StringBuilder(part1).reverse().toString();
+                if (map.containsKey(part2Reverse) && isPalindrome(part1)) {
+                    pairs.add(Arrays.asList(map.get(part2Reverse), i));
+                }  if (map.containsKey(part1Reverse) && isPalindrome(part2)) {
+                    pairs.add(Arrays.asList(i, map.get(part1Reverse)));
+                }
+
+            }
+        }
+
+        return pairs;
+
+
     }
 
     private boolean isPartPalindrome(String s, int i, int j) {

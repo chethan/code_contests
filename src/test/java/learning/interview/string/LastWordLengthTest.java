@@ -1,5 +1,6 @@
-package leetcode;
+package learning.interview.string;
 
+import learning.interview.string.LastWordLength;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

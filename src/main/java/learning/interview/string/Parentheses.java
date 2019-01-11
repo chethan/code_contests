@@ -2,12 +2,14 @@ package learning.interview.string;
 
 import ds.Tuple;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
  * Created by Chethan on 10/15/15.
  */
-class ValidParentheses {
+class Parentheses {
     //https://leetcode.com/problems/valid-parentheses/
     boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
@@ -49,5 +51,27 @@ class ValidParentheses {
             to = from;
         }
         return Math.max(longest, to);
+    }
+
+    //https://leetcode.com/problems/generate-parentheses/
+    List<String> generateParenthesis(int n) {
+        List<String> result  = new ArrayList<>();
+        generateParenthesisRecur(result,"",0,0,n);
+        return result;
+    }
+
+    private void generateParenthesisRecur(List<String> result,String str,int open,int close, int total){
+        if(str.length()==total*2){
+            result.add(str);
+            return;
+        }
+
+        if(open < total){
+            generateParenthesisRecur(result,str+"(",open+1,close,total);
+        }
+        if(close < open ){
+            generateParenthesisRecur(result,str+")",open,close+1,total);   
+        }
+
     }
 }

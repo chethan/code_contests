@@ -1,4 +1,4 @@
-package leetcode;
+package learning.interview.string;
 
 /**
  * Created by Chethan on 9/30/16.

@@ -33,4 +33,13 @@ public class ReverserTest {
         assertThat(reverser.reverseString("NoWords")).isEqualTo("sdroWoN");
         assertThat(reverser.reverseString("Let's take LeetCode contest")).isEqualTo("tsetnoc edoCteeL ekat s'te");
     }
+
+    @Test
+    public void testReverseVowels() {
+        Reverser reverser = new Reverser();
+        assertThat(reverser.reverseVowels("hello")).isEqualTo("holle");
+        assertThat(reverser.reverseVowels("leetcode")).isEqualTo("leotcede");
+        assertThat(reverser.reverseVowels("")).isEqualTo("");
+        assertThat(reverser.reverseVowels("e")).isEqualTo("e");
+    }
 }

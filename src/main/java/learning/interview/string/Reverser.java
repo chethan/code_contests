@@ -47,6 +47,27 @@ class Reverser {
 
     }
 
+    //https://leetcode.com/problems/reverse-vowels-of-a-string/
+    String reverseVowels(String s) {
+        if (s == null || s.length() == 0) return s;
+        char[] chars = s.toCharArray();
+        for (int i = 0, j = chars.length - 1; i < j; ) {
+            if ("aeiou".indexOf(Character.toLowerCase(chars[i])) == -1) {
+                i++;
+                continue;
+            }
+            if ("aeiou".indexOf(Character.toLowerCase(chars[j])) == -1) {
+                j--;
+                continue;
+            }
+            char temp = chars[i];
+            chars[i++] = chars[j];
+            chars[j--] = temp;
+        }
+        return new String(chars);
+    }
+
+
     private void reverseString(char[] s, int from, int to) {
         for (int i = from, j = to - 1; i < j; i++, j--) {
             char temp = s[i];
