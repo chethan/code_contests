@@ -53,24 +53,38 @@ class Parentheses {
         return Math.max(longest, to);
     }
 
+    //https://leetcode.com/problems/valid-parenthesis-string/
+    boolean checkValidString(String s) {
+        return checkValidStringRecur(s, 0, 0);
+    }
+
+    private boolean checkValidStringRecur(String s, int index, int count) {
+        if (count < 0) return false;
+        if (index >= s.length()) return count == 0;
+        if (s.charAt(index) == '(') return checkValidStringRecur(s, index + 1, count + 1);
+        if (s.charAt(index) == ')') return checkValidStringRecur(s, index + 1, count - 1);
+        return checkValidStringRecur(s, index + 1, count - 1) || checkValidStringRecur(s, index + 1, count + 1) || checkValidStringRecur(s, index + 1, count);
+    }
+
+
     //https://leetcode.com/problems/generate-parentheses/
     List<String> generateParenthesis(int n) {
-        List<String> result  = new ArrayList<>();
-        generateParenthesisRecur(result,"",0,0,n);
+        List<String> result = new ArrayList<>();
+        generateParenthesisRecur(result, "", 0, 0, n);
         return result;
     }
 
-    private void generateParenthesisRecur(List<String> result,String str,int open,int close, int total){
-        if(str.length()==total*2){
+    private void generateParenthesisRecur(List<String> result, String str, int open, int close, int total) {
+        if (str.length() == total * 2) {
             result.add(str);
             return;
         }
 
-        if(open < total){
-            generateParenthesisRecur(result,str+"(",open+1,close,total);
+        if (open < total) {
+            generateParenthesisRecur(result, str + "(", open + 1, close, total);
         }
-        if(close < open ){
-            generateParenthesisRecur(result,str+")",open,close+1,total);   
+        if (close < open) {
+            generateParenthesisRecur(result, str + ")", open, close + 1, total);
         }
 
     }

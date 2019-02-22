@@ -107,6 +107,7 @@ class StringSearch {
         return hash;
     }
 
+    //https://algs4.cs.princeton.edu/lectures/53SubstringSearch.pdf
     private long deriveHash(long currentHash, char oldChar, char newChar, int rm) {
         long intermediate = (currentHash + (oldChar * (MOD - rm))) * RADIX;
         return (intermediate + (newChar)) % MOD;

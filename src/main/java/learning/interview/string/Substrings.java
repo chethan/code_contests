@@ -64,4 +64,11 @@ public class Substrings {
         }
         return false;
     }
+
+    //https://leetcode.com/problems/minimum-window-substring/
+    String minWindow(String s, String t) {
+        if (s == null || s.length() == 0 || t.length() == 0) return "";
+        int[] lookup = new int[128];
+        return "";
+    }
 }

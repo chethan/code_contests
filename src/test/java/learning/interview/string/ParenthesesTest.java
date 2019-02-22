@@ -32,4 +32,13 @@ public class ParenthesesTest {
         assertThat(parentheses.generateParenthesis(3)).containsOnly("()()()", "(())()", "(()())", "()(())", "((()))");
 
     }
+
+    @Test
+    public void testCheckValidString() {
+        Parentheses parentheses = new Parentheses();
+        assertThat(parentheses.checkValidString("(*)")).isTrue();
+        assertThat(parentheses.checkValidString("***")).isTrue();
+        assertThat(parentheses.checkValidString("(*))")).isTrue();
+
+    }
 }
