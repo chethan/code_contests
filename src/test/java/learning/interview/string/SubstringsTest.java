@@ -24,6 +24,7 @@ public class SubstringsTest {
         assertThat(substrings.lengthOfLongestSubstringBetter("abcdefgh")).isEqualTo(8);
         assertThat(substrings.lengthOfLongestSubstringBetter("pwwkew")).isEqualTo(3);
     }
+
     @Test
     public void testRepeatedSubstringPattern() {
         Substrings substrings = new Substrings();
@@ -31,5 +32,16 @@ public class SubstringsTest {
         assertThat(substrings.repeatedSubstringPattern("aba")).isFalse();
         assertThat(substrings.repeatedSubstringPattern("abababababac")).isFalse();
         assertThat(substrings.repeatedSubstringPattern("aabaaba")).isFalse();
+    }
+
+    @Test
+    public void testRepeatedSubstringPatternKMP() {
+        Substrings substrings = new Substrings();
+        assertThat(substrings.repeatedSubstringPatternKMP("a")).isFalse();
+        assertThat(substrings.repeatedSubstringPatternKMP("ababa")).isFalse();
+        assertThat(substrings.repeatedSubstringPatternKMP("abab")).isTrue();
+        assertThat(substrings.repeatedSubstringPatternKMP("aba")).isFalse();
+        assertThat(substrings.repeatedSubstringPatternKMP("abababababac")).isFalse();
+        assertThat(substrings.repeatedSubstringPatternKMP("aabaaba")).isFalse();
     }
 }

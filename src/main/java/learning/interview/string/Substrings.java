@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Substrings {
+class Substrings {
     //https://leetcode.com/problems/longest-substring-without-repeating-characters
     int lengthOfLongestSubstring(String s) {
         int start = 0, end = 1, maxLength = 0;
@@ -65,10 +65,33 @@ public class Substrings {
         return false;
     }
 
-    //https://leetcode.com/problems/minimum-window-substring/
-    String minWindow(String s, String t) {
-        if (s == null || s.length() == 0 || t.length() == 0) return "";
-        int[] lookup = new int[128];
-        return "";
+    //https://leetcode.com/problems/repeated-substring-pattern
+    //ABABA
+    //0,0,1,2,3
+    boolean repeatedSubstringPatternKMP(String s) {
+        int[] failureTable = computeFailureTable(s);
+        int failureLength = failureTable[failureTable.length - 1];
+        return (failureLength >= (failureTable.length / 2.0)) && failureTable.length % (failureTable.length - failureLength) == 0;
     }
+
+    private int[] computeFailureTable(String s) {
+        int[] failureTable = new int[s.length()];
+        failureTable[0] = 0;
+        int left = 0, right = 1;
+        while (right < failureTable.length) {
+            if (s.charAt(left) == s.charAt(right)) {
+                left++;
+                failureTable[right] = left;
+                right++;
+            } else if (left > 0) {
+                left = failureTable[left - 1];
+            } else {
+                failureTable[right] = 0;
+                right++;
+            }
+        }
+        return failureTable;
+    }
+
+
 }

@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 
 class Palindromes {
     //https://leetcode.com/problems/shortest-palindrome
+    //Complexity: o(n*n)
     String shortestPalindrome(String s) {
         if (isPalindrome(s)) return s;
         StringBuilder builder = new StringBuilder();
@@ -18,6 +19,8 @@ class Palindromes {
     }
 
     //https://leetcode.com/problems/shortest-palindrome
+    //Complexity: o(n)
+    //Find the largest palindrome substring starting with index 0 , and prepend the remaining chars in reverse order
     String shortestPalindromeRabinKarp(String s) {
         int n = s.length(), pos = -1;
         long B = 256, MOD = 997, POW = 1, hash1 = 0, hash2 = 0;
@@ -30,6 +33,7 @@ class Palindromes {
     }
 
     //https://leetcode.com/problems/longest-palindromic-substring
+    //Complexity: o(n*n)
     String longestPalindrome(String s) {
         if (s == null) return "";
         int n = s.length(), index = 0;
@@ -52,6 +56,7 @@ class Palindromes {
     }
 
     //https://leetcode.com/problems/palindromic-substrings
+    //Complexity: o(n*n)
     int countSubstrings(String s) {
         if (s == null) return 0;
         int n = s.length(), count = 0;
@@ -164,7 +169,8 @@ class Palindromes {
                 String part1Reverse = new StringBuilder(part1).reverse().toString();
                 if (map.containsKey(part2Reverse) && isPalindrome(part1)) {
                     pairs.add(Arrays.asList(map.get(part2Reverse), i));
-                }  if (map.containsKey(part1Reverse) && isPalindrome(part2)) {
+                }
+                if (map.containsKey(part1Reverse) && isPalindrome(part2)) {
                     pairs.add(Arrays.asList(i, map.get(part1Reverse)));
                 }
 

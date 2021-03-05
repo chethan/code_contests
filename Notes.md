@@ -9,7 +9,15 @@
 #Numbers
 
 - Check your solution for 0 and negative numbers
-- Look for overflow and use bigger primitive if necessary 
+- Look for overflow and use bigger primitive if necessary
+
+#Strings
+
+- Rabin Karp algorithm is efficient for string search and certain palindrome problems
+
+ 
+    
+ 
 
 
 

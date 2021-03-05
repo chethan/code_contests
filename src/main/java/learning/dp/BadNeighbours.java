@@ -12,7 +12,7 @@ public class BadNeighbours {
 
     public int maxDonationCircular(int[] donations) {
         return Math.max(maxDonations(Arrays.copyOfRange(donations, 0, donations.length - 1)),
-                maxDonations(Arrays.copyOfRange(donations, 1, donations.length)));
+            maxDonations(Arrays.copyOfRange(donations, 1, donations.length)));
     }
 
     public int maxDonations(int[] donations) {
