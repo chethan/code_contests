@@ -1,8 +1,6 @@
 package leetcode.tree;
 
 import ds.TreeNode;
-import leetcode.InOrder;
-import leetcode.tree.BinarySearchTree;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
