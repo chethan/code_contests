@@ -23,8 +23,8 @@ public class VerticalOrder {
         queue.offer(new Pair<>(root, 0));
         while (!queue.isEmpty()) {
             Pair<TreeNode, Integer> p = queue.poll();
-            TreeNode node = p.getKey();
-            int column = p.getValue();
+            TreeNode node = p.getFirst();
+            int column = p.getLast();
             if (node != null) {
                 columnMap.putIfAbsent(column, new ArrayList<>());
                 columnMap.get(column).add(node.val);
