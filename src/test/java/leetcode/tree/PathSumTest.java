@@ -1,6 +1,7 @@
-package leetcode;
+package leetcode.tree;
 
 import ds.TreeNode;
+import leetcode.tree.PathSum;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
