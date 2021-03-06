@@ -22,9 +22,9 @@ public class BinarySearchTree {
         }
         boolean isLeftBST = root.left == null ||
             root.left.val < root.val && isValidBSTRecursive(root.left, min, root.val);
-        boolean isrightBST = root.right == null ||
+        boolean isRightBST = root.right == null ||
             root.right.val > root.val && isValidBSTRecursive(root.right, root.val, max);
-        return isLeftBST && isrightBST;
+        return isLeftBST && isRightBST;
     }
 
     //https://leetcode.com/problems/kth-smallest-element-in-a-bst/
@@ -35,7 +35,7 @@ public class BinarySearchTree {
             if (loopNode != null) {
                 nodes.push(loopNode);
                 loopNode = loopNode.left;
-            } else if (!nodes.isEmpty()) {
+            } else {
                 TreeNode pop = nodes.pop();
                 k--;
                 if (k == 0) {
@@ -69,12 +69,12 @@ public class BinarySearchTree {
     //https://leetcode.com/problems/closest-binary-search-tree-value/
     public int closestValue(TreeNode root, double target) {
         int returnValue = Integer.MAX_VALUE;
-        TreeNode loopnode = root;
-        while (loopnode != null) {
-            if (Math.abs(target - loopnode.val) < Math.abs(target - returnValue)) {
-                returnValue = loopnode.val;
+        TreeNode loopNode = root;
+        while (loopNode != null) {
+            if (Math.abs(target - loopNode.val) < Math.abs(target - returnValue)) {
+                returnValue = loopNode.val;
             }
-            loopnode = target > loopnode.val ? loopnode.right : loopnode.left;
+            loopNode = target > loopNode.val ? loopNode.right : loopNode.left;
         }
         return returnValue;
     }
