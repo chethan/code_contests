@@ -23,4 +23,12 @@ public class MeetingRoomsTest {
         assertThat(meetingRooms.canAttendMeetings(new int[][]{{23, 30}, {5, 10}, {15, 20}}))
             .isTrue();
     }
+
+    @Test
+    public void testMergeIntervals() {
+        MeetingRooms meetingRooms = new MeetingRooms();
+        assertThat(meetingRooms.mergeIntervals(new int[][]{{0, 30}, {5, 10}, {15, 20}}))
+            .containsExactly(new int[]{0, 30});
+
+    }
 }
