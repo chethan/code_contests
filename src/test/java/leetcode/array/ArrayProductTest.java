@@ -1,5 +1,6 @@
-package leetcode;
+package leetcode.array;
 
+import leetcode.array.ArrayProduct;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

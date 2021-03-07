@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class MeetingRooms {
+public class Intervals {
 
     //https://leetcode.com/problems/meeting-rooms-ii/
     public int minMeetingRooms(int[][] intervals) {
@@ -36,12 +36,33 @@ public class MeetingRooms {
         return true;
     }
 
+    //https://leetcode.com/problems/insert-interval/
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        int[][] newIntervals = new int[intervals.length + 1][2];
+        int index = 0;
+        for (; index < intervals.length && intervals[index][0] <= newInterval[0]; index++) {
+            newIntervals[index] = intervals[index];
+        }
+        newIntervals[index] = newInterval;
+        for (; index < intervals.length; index++) {
+            newIntervals[index + 1] = intervals[index];
+        }
+        return mergeSortedIntervals(newIntervals);
+    }
+
     //https://leetcode.com/problems/merge-intervals/
     public int[][] mergeIntervals(int[][] intervals) {
         if (intervals.length <= 1) {
             return intervals;
         }
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        return mergeSortedIntervals(intervals);
+    }
+
+    private int[][] mergeSortedIntervals(int[][] intervals) {
+        if (intervals.length <= 1) {
+            return intervals;
+        }
         List<int[]> finalSlots = new ArrayList<>();
         finalSlots.add(intervals[0]);
         int index = 0;

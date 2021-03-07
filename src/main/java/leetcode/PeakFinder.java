@@ -1,8 +1,8 @@
 package leetcode;
 
-//https://leetcode.com/problems/find-peak-element/description/
 public class PeakFinder {
 
+    //https://leetcode.com/problems/find-peak-element/description/
     public int findPeakElement(int[] nums) {
         if (nums.length == 0) return -1;
         return findPeakElementRecur(nums, 0, nums.length);
