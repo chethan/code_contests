@@ -38,6 +38,15 @@ public class BinarySearchTest {
         assertThat(binarySearch.searchInRotatedArray(new int[]{3, 4, 5, 1, 2}, 2)).isEqualTo(4);
         assertThat(binarySearch.searchInRotatedArray(new int[]{3, 4, 5, 1, 2}, 3)).isEqualTo(0);
         assertThat(binarySearch.searchInRotatedArray(new int[]{3, 4, 5, 1, 2}, 6)).isEqualTo(-1);
+    }
 
+    @Test
+    public void testMedianOfTwoSortedArrays() {
+        BinarySearch binarySearch = new BinarySearch();
+        assertThat(binarySearch.findMedianSortedArrays(new int[]{5, 6, 7, 17},
+            new int[]{3, 4, 11, 14, 16})).isEqualTo(7.0);
+        assertThat(binarySearch.findMedianSortedArrays(new int[]{5, 6, 7, 17},
+            new int[]{3, 4, 11, 14})).isEqualTo(6.5);
     }
 }
+
