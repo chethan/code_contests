@@ -50,6 +50,36 @@ public class QuickSort {
         return Arrays.copyOfRange(unique, 0, k);
     }
 
+    //https://leetcode.com/problems/k-closest-points-to-origin/
+    public int[][] kClosest(int[][] ints, int i) {
+        int left = 0, right = ints.length - 1;
+        while (left < right) {
+            int pivot = quickSelectPoints(ints, left, right);
+            if (pivot == i - 1) {
+                break;
+            }
+            if (pivot < i - 1) {
+                left = pivot + 1;
+            } else {
+                right = pivot - 1;
+            }
+        }
+        return Arrays.copyOfRange(ints, 0, i);
+    }
+
+    private int quickSelectPoints(int[][] points, int left, int right) {
+        int pivotIndex = left;
+        double pivot = distance(points[left][0], points[left][1]);
+        for (int i = left + 1; i <= right; i++) {
+            if (pivot > distance(points[i][0], points[i][1])) {
+                pivotIndex++;
+                swap(points, pivotIndex, i);
+            }
+        }
+        swap(points, pivotIndex, left);
+        return pivotIndex;
+    }
+
     private int quickSelect(int[] nums, Map<Integer, Integer> frequency, int left, int right) {
         int pivotIndex = left;
         int pivot = nums[left];
@@ -81,4 +111,15 @@ public class QuickSort {
         nums[to] = nums[from];
         nums[from] = temp;
     }
+
+    private void swap(int[][] nums, int to, int from) {
+        int[] temp = nums[to];
+        nums[to] = nums[from];
+        nums[from] = temp;
+    }
+
+    private double distance(int x, int y) {
+        return Math.sqrt(x * x + y * y);
+    }
+
 }
