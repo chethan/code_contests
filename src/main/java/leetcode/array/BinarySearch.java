@@ -93,7 +93,7 @@ public class BinarySearch {
         int lo = 0;
         int hi = nums.length;
         while (lo < hi) {
-            int mid = (lo + hi) / 2;
+            int mid = lo + (hi - lo) / 2;
             if (nums[mid] > target || (left && target == nums[mid])) {
                 hi = mid;
             } else {
