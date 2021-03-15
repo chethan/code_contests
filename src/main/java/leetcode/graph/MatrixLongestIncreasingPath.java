@@ -1,4 +1,4 @@
-package leetcode.backtracking;
+package leetcode.graph;
 
 import java.util.HashMap;
 import java.util.Map;

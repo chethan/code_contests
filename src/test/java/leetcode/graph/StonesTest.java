@@ -1,4 +1,4 @@
-package leetcode.backtracking;
+package leetcode.graph;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,19 +1,19 @@
 package leetcode;
 
 public class Pair<T, U> {
-    T first;
-    U last;
+    T key;
+    U value;
 
-    public Pair(T first, U value) {
-        this.first = first;
-        this.last = value;
+    public Pair(T key, U value) {
+        this.key = key;
+        this.value = value;
     }
 
-    public T getFirst() {
-        return first;
+    public T getKey() {
+        return key;
     }
 
-    public U getLast() {
-        return last;
+    public U getValue() {
+        return value;
     }
 }

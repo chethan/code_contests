@@ -93,17 +93,17 @@ public class BinarySearchTree {
             return null;
         }
         Pair<TreeNode, TreeNode> pair = toDoublyList(root, new Pair<>(null, null));
-        pair.getLast().right = pair.getFirst();
-        pair.getFirst().left = pair.getLast();
-        return pair.getFirst();
+        pair.getValue().right = pair.getKey();
+        pair.getKey().left = pair.getValue();
+        return pair.getKey();
     }
 
     private Pair<TreeNode, TreeNode> toDoublyList(TreeNode node, Pair<TreeNode, TreeNode> data) {
         if (node == null) {
             return data;
         }
-        TreeNode last = data.getLast();
-        TreeNode first = data.getFirst();
+        TreeNode last = data.getValue();
+        TreeNode first = data.getKey();
         if (last != null) {
             last.right = node;
             node.left = last;
