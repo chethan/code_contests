@@ -54,7 +54,6 @@ public class WordSearch {
                 break;
             }
         }
-
         board[row][col] = word.charAt(index);
         return found;
     }
