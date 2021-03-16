@@ -1,5 +1,6 @@
 package leetcode.array;
 
+//https://leetcode.com/problems/backspace-string-compare/
 public class BackspaceCompare {
 
     public boolean backspaceCompare(String S, String T) {
