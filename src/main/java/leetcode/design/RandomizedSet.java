@@ -1,4 +1,4 @@
-package learning.interview.arrays;
+package leetcode.design;
 
 import java.util.*;
 

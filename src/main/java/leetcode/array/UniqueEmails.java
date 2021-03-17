@@ -18,7 +18,7 @@ public class UniqueEmails {
     private String canonicalize(String email) {
         int domainIndex = email.indexOf("@");
         String local = email.substring(0, domainIndex);
-        String domain = email.substring(domainIndex, email.length());
+        String domain = email.substring(domainIndex);
         int plusIndex = local.indexOf("+");
         if (plusIndex != -1) {
             local = local.substring(0, plusIndex);

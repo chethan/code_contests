@@ -1,9 +1,9 @@
 package learning.interview.arrays;
 
+import leetcode.design.RandomizedSet;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.*;
 
 public class RandomizedSetTest {
 

@@ -26,7 +26,7 @@ public class LongestIncreasingSubSeq {
         Integer integer = IntStream.range(0, lis.length)
                 .boxed().max(Comparator.comparing(i -> lis[i])).get();
         printUsingDpTable(dp, integer, numbers);
-        return lis[integer];
+        return lis[numbers.size()-1];
     }
 
     public int lisMemoization(List<Integer> numbers) {

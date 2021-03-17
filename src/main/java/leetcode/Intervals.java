@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 public class Intervals {
 
@@ -15,6 +16,8 @@ public class Intervals {
         }
         PriorityQueue<Integer> occupiedRooms = new PriorityQueue<>(intervals.length);
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        List<int[]> collect = Arrays.stream(intervals).sorted(Comparator.comparingInt(a -> a[0]))
+            .collect(Collectors.toList());
         occupiedRooms.add(intervals[0][1]);
         for (int i = 1; i < intervals.length; i++) {
             if (intervals[i][0] >= occupiedRooms.peek()) {
