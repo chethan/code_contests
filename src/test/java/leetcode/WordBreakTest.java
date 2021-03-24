@@ -20,6 +20,13 @@ public class WordBreakTest {
     }
 
     @Test
+    public void testWordBreakRecursion() throws Exception {
+        WordBreak wordBreak = new WordBreak();
+        assertThat(wordBreak.wordBreakRecursion("leetcode",
+                new HashSet<>(Arrays.asList("leetcod", "leet", "code")))).isTrue();
+    }
+
+    @Test
     public void testWordBreakTwo() throws Exception {
         WordBreak wordBreak = new WordBreak();
         assertThat(wordBreak.wordBreakTwo("catsanddog",
