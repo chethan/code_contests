@@ -36,6 +36,13 @@ public class IntervalsTest {
         Intervals intervals = new Intervals();
         assertThat(intervals.insert(new int[][]{{0, 30}, {5, 10}, {15, 20}}, new int[]{10, 35}))
             .containsExactly(new int[]{0, 35});
+    }
+
+    @Test
+    public void testFindMinArrowShots() {
+        Intervals intervals = new Intervals();
+        assertThat(intervals.findMinArrowShots(new int[][]{{1, 2}, {2, 3}, {3, 4}, {4, 5}}))
+            .isEqualTo(2);
 
     }
 }
