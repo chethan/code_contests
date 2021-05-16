@@ -4,7 +4,7 @@ package learning.dp;
  * Created by Chethan on 9/21/15.
  */
 //https://leetcode.com/problems/minimum-path-sum/
-//M[m,n]=max{M[m-1][n],M[n-1][m]}+A[m][n]
+//M[m,n]=min{M[m-1][n],M[n-1][m]}+A[m][n]
 public class MinimumPathSum {
     public int minPathSum(int[][] grid) {
         int height = grid.length;
