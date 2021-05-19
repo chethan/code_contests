@@ -34,7 +34,17 @@ public class AnagramsTest {
         assertThat(anagrams.groupAnagrams(new String[]{"eat", "tea", "tan"})).hasSize(2);
         assertThat(anagrams.groupAnagrams(new String[]{})).hasSize(0);
         assertThat(anagrams.groupAnagrams(new String[]{"eat", "tea"})).hasSize(1);
+        assertThat(anagrams.groupAnagramsWithoutSorting(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"})).hasSize(3);
+        assertThat(anagrams.groupAnagramsWithoutSorting(new String[]{"eat", "tea", "tan"})).hasSize(2);
+        assertThat(anagrams.groupAnagramsWithoutSorting(new String[]{})).hasSize(0);
+        assertThat(anagrams.groupAnagramsWithoutSorting(new String[]{"eat", "tea"})).hasSize(1);
 
+    }
+
+    @Test
+    public void testGroupShiftedString() throws Exception {
+        Anagrams anagrams = new Anagrams();
+        assertThat(anagrams.groupStrings(new String[]{"abc","bcd","acef","xyz","az","ba","a","z"})).hasSize(4);
     }
     @Test
     public void testFindAnagrams() throws Exception {

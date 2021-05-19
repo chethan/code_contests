@@ -2,7 +2,13 @@ package learning.interview.string;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -15,30 +21,34 @@ class Anagrams {
     Anagrams() throws Exception {
         //TODO: Read from classpath
         words = Files.readAllLines(Paths.get("src/main/resources/words")).
-                stream().map(String::toLowerCase).
-                collect(Collectors.toSet());
+            stream().map(String::toLowerCase).
+            collect(Collectors.toSet());
     }
 
     ////https://leetcode.com/problems/valid-anagram/
     boolean isAnagram(String s, String t) {
-        if (s == null || t == null || s.length() != t.length()) return false;
+        if (s == null || t == null || s.length() != t.length()) {
+            return false;
+        }
         int[] charCounts = new int[256];
         for (int i = 0; i < s.length(); i++) {
             charCounts[s.charAt(i)]++;
             charCounts[t.charAt(i)]--;
         }
         for (int charCount : charCounts) {
-            if (charCount != 0) return false;
+            if (charCount != 0) {
+                return false;
+            }
         }
         return true;
     }
 
 
-    //one more ideas to use prime numbers to generate the key for hashmap, this will avoid sorting
-    //https://leetcode.com/problems/group-anagrams/discuss/19183/Java-beat-100!!!-use-prime-number
-        //https://leetcode.com/problems/group-anagrams/
+    //https://leetcode.com/problems/group-anagrams/
     List<List<String>> groupAnagrams(String[] strs) {
-        if (strs == null || strs.length == 0) return new ArrayList<>();
+        if (strs == null || strs.length == 0) {
+            return new ArrayList<>();
+        }
         Map<String, List<String>> map = new HashMap<>();
         for (String str : strs) {
             char[] chars = str.toCharArray();
@@ -48,6 +58,49 @@ class Anagrams {
             map.get(sortedString).add(str);
         }
         return map.keySet().stream().map(map::get).collect(Collectors.toList());
+    }
+
+    //https://leetcode.com/problems/group-anagrams/
+    List<List<String>> groupAnagramsWithoutSorting(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return new ArrayList<>();
+        }
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            char[] chars = new char[26];
+            for (char c : str.toCharArray()) {
+                chars[c - 'a']++;
+            }
+            String countKey = new String(chars);
+            map.putIfAbsent(countKey, new ArrayList<>());
+            map.get(countKey).add(str);
+        }
+        return new ArrayList<>(map.values());
+    }
+
+    //https://leetcode.com/problems/group-shifted-strings/
+    public List<List<String>> groupStrings(String[] strings) {
+        if (strings == null || strings.length == 0) {
+            return new ArrayList<>();
+        }
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strings) {
+            String countKey = getKeyBasedOnDifference(str);
+            map.putIfAbsent(countKey, new ArrayList<>());
+            map.get(countKey).add(str);
+        }
+        return new ArrayList<>(map.values());
+    }
+
+    private String getKeyBasedOnDifference(String str) {
+        char[] chars = str.toCharArray();
+        StringBuilder key = new StringBuilder();
+        for(int i = 1; i < chars.length; i++) {
+            int diff = chars[i] - chars[i-1];
+            key.append(diff < 0 ? diff + 26 : diff);
+            key.append(",");
+        }
+        return key.toString();
     }
 
     //https://leetcode.com/problems/find-all-anagrams-in-a-string
@@ -115,7 +168,9 @@ class Anagrams {
         for (int i = 0; i < chars.length; i++) {
             String nextSoFar = soFar + chars[i];
             Optional<String> permutation = firstAnagram(nextSoFar, rest.substring(0, i) + rest.substring(i + 1));
-            if (permutation.isPresent()) return permutation;
+            if (permutation.isPresent()) {
+                return permutation;
+            }
         }
         return Optional.empty();
 
