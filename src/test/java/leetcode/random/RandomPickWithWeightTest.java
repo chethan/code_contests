@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,7 +8,7 @@ public class RandomPickWithWeightTest {
 
     @Test
     public void testRandomPick() {
-        RandomPickWithWeight randomPickWithWeight = new RandomPickWithWeight(new int[]{1});
+        var randomPickWithWeight = new RandomPickWithWeight(new int[]{1});
         assertThat(randomPickWithWeight.pickIndex()).isEqualTo(0);
         assertThat(randomPickWithWeight.pickIndex()).isEqualTo(0);
     }

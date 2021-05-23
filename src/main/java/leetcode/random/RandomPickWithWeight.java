@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.random;
 
 //https://leetcode.com/problems/random-pick-with-weight/
 public class RandomPickWithWeight {
