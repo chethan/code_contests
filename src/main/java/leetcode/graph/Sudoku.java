@@ -6,13 +6,14 @@ import java.util.Map;
 import java.util.Set;
 
 //https://leetcode.com/problems/sudoku-solver/
-public class SudokuSolver {
+public class Sudoku {
 
-    private final Map<Integer, Set<Integer>> rowCache = new HashMap<>();
-    private final Map<Integer, Set<Integer>> colCache = new HashMap<>();
-    private final Map<Integer, Set<Integer>> boxCache = new HashMap<>();
+    private Map<Integer, Set<Integer>> rowCache;
+    private Map<Integer, Set<Integer>> colCache;
+    private Map<Integer, Set<Integer>> boxCache;
 
     public void solveSudoku(char[][] board) {
+        resetCache();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 if (board[i][j] != '.') {
@@ -22,6 +23,28 @@ public class SudokuSolver {
             }
         }
         solveSudoku(board, 0, 0);
+    }
+
+    public boolean isValidSudoku(char[][] board) {
+        resetCache();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] != '.') {
+                    int digit = Character.getNumericValue(board[i][j]);
+                    if (!canPlaceDigit(digit, i, j, board)) {
+                        return false;
+                    }
+                    placeDigit(digit, i, j, board);
+                }
+            }
+        }
+        return true;
+    }
+
+    private void resetCache() {
+        rowCache = new HashMap<>();
+        colCache = new HashMap<>();
+        boxCache = new HashMap<>();
     }
 
     private boolean solveSudoku(char[][] board, int row, int col) {
