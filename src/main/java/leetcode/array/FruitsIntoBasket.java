@@ -1,5 +1,6 @@
 package leetcode.array;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,5 +22,22 @@ public class FruitsIntoBasket {
             res = Math.max(res, j - i + 1);
         }
         return res;
+    }
+
+    public int totalFruitOptimized(int[] fruits) {
+        int left = 0, right = 0, maxFruits = 0;
+        Map<Integer, Integer> reverseIndex = new HashMap<>();
+        while (right < fruits.length) {
+            reverseIndex.put(fruits[right], right);
+            if (reverseIndex.size() == 3) {
+                int fruitIndexToBeRemoved = Collections.min(reverseIndex.values());
+                reverseIndex.remove(fruits[fruitIndexToBeRemoved]);
+                left = fruitIndexToBeRemoved + 1;
+
+            }
+            maxFruits = Math.max(maxFruits, right - left + 1);
+            right++;
+        }
+        return maxFruits;
     }
 }

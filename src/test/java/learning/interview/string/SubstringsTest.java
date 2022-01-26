@@ -1,9 +1,8 @@
 package learning.interview.string;
 
-import org.testng.annotations.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.*;
+
+import org.testng.annotations.Test;
 
 public class SubstringsTest {
 
@@ -23,6 +22,15 @@ public class SubstringsTest {
         assertThat(substrings.lengthOfLongestSubstringBetter("bbbbb")).isEqualTo(1);
         assertThat(substrings.lengthOfLongestSubstringBetter("abcdefgh")).isEqualTo(8);
         assertThat(substrings.lengthOfLongestSubstringBetter("pwwkew")).isEqualTo(3);
+    }
+
+    @Test
+    public void lengthOfLongestSubstringTwoDistinct() {
+        Substrings substrings = new Substrings();
+        assertThat(substrings.lengthOfLongestSubstringTwoDistinct("abcabcbb")).isEqualTo(4);
+        assertThat(substrings.lengthOfLongestSubstringTwoDistinct("bbbbb")).isEqualTo(5);
+        assertThat(substrings.lengthOfLongestSubstringTwoDistinct("abcdefgh")).isEqualTo(2);
+        assertThat(substrings.lengthOfLongestSubstringTwoDistinct("pwwkew")).isEqualTo(3);
     }
 
     @Test

@@ -11,5 +11,7 @@ public class FruitsIntoBasketTest {
         FruitsIntoBasket fruitsIntoBasket = new FruitsIntoBasket();
         assertThat(fruitsIntoBasket.totalFruit(new int[]{3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4}))
             .isEqualTo(5);
+        assertThat(fruitsIntoBasket.totalFruitOptimized(new int[]{3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4}))
+            .isEqualTo(5);
     }
 }
