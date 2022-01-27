@@ -1,8 +1,11 @@
 package learning.interview.string;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -56,6 +59,7 @@ class Substrings {
         return maxLength;
     }
 
+    //https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/
     public int lengthOfLongestSubstringTwoDistinct(String s) {
         int left = 0, right = 0, maxLength = 0;
         Map<Character, Integer> reverseIndex = new HashMap<>();
@@ -71,6 +75,49 @@ class Substrings {
         }
         return maxLength;
     }
+
+    //https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        if (s == null) {
+            return 0;
+        }
+        int left = 0, right = 0, maxLength = 0;
+        Map<Character, Integer> reverseIndex = new LinkedHashMap<>(100, 0.5f, true);
+        while (right < s.length()) {
+            reverseIndex.put(s.charAt(right), right);
+            if (reverseIndex.size() > k) {
+                int lastIndex = Collections.min(reverseIndex.values());
+                reverseIndex.remove(s.charAt(lastIndex));
+                left = lastIndex + 1;
+            }
+            maxLength = Math.max(maxLength, right - left + 1);
+            right++;
+        }
+        return maxLength;
+    }
+
+    //https://leetcode.com/problems/maximum-erasure-value/
+    public int maximumUniqueSubarray(int[] nums) {
+        if (nums == null) {
+            return 0;
+        }
+        int left = 0, right = 0, maxScore = 0;
+        Map<Integer, Integer> reverseIndex = new HashMap<>();
+        List<Integer> prefixSum = new ArrayList<>();
+        prefixSum.add(0);
+        while (right < nums.length) {
+            prefixSum.add(prefixSum.get(right) + nums[right]);
+            if (reverseIndex.containsKey(nums[right])) {
+                left = Math.max(reverseIndex.get(nums[right]) + 1, left);
+            }
+            reverseIndex.put(nums[right], right);
+            maxScore = Math.max(maxScore, prefixSum.get(right + 1) - prefixSum.get(left));
+            right++;
+
+        }
+        return maxScore;
+    }
+
 
     //https://leetcode.com/problems/repeated-substring-pattern
     boolean repeatedSubstringPattern(String s) {
