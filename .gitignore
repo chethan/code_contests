@@ -7,5 +7,5 @@ build
 .idea
 .DS_Store
 out
-
+gradle
 src/test/java/com/yahoo/tns/yapee/grid/pigunit/generated
