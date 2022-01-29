@@ -27,7 +27,9 @@ class BitwiseArithmetic {
     }
 
     int divide(int a, int b) {
-        if (b == 0) return 0;
+        if (b == 0) {
+            return 0;
+        }
         int power = 32, quotient = 0;
         int bpow = b << power;
         while (a >= b) {
@@ -42,7 +44,9 @@ class BitwiseArithmetic {
     }
 
     int multiply(int a, int b) {
-        if (a == 0 || b == 0) return 0;
+        if (a == 0 || b == 0) {
+            return 0;
+        }
         int shiftingMarker = 0, product = 0;
         for (; b != 0; shiftingMarker++, b >>>= 1) {
             if ((b & 1) != 0) {
@@ -71,11 +75,9 @@ class BitwiseArithmetic {
     int smartAdd(int a, int b) {
         int sum = a ^ b; // XOR derives the sum bits, without carry
         int carry = (a & b) << 1; // AND derives the carry bits
-
         if (carry == 0) {
             return sum;
         }
-
         return smartAdd(sum, carry);
     }
 }

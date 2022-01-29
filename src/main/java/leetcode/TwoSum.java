@@ -1,7 +1,6 @@
 package leetcode;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Chethan on 8/9/15.
@@ -44,24 +43,5 @@ public class TwoSum {
             }
         }
         return new int[]{-1, -1};
-    }
-
-    //https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/
-    public int maxSubArrayLen(int[] nums, int k) {
-        int prefixSum = 0, longestArray = 0;
-        Map<Integer, Integer> reverseIndex = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            prefixSum += nums[i];
-            if (prefixSum == k) {
-                longestArray = Math.max(longestArray, i + 1);
-            }
-            if (reverseIndex.containsKey(prefixSum - k)) {
-                longestArray = Math.max(longestArray, i - reverseIndex.get(prefixSum - k));
-            }
-            if (!reverseIndex.containsKey(prefixSum)) {
-                reverseIndex.put(prefixSum, i);
-            }
-        }
-        return longestArray;
     }
 }

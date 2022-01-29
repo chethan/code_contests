@@ -138,6 +138,45 @@ class Substrings {
         return false;
     }
 
+    //https://leetcode.com/problems/minimum-window-substring/
+    public String minWindow(String s, String t) {
+        if (s == null || t == null || s.length() < t.length()) {
+            return "";
+        }
+        Map<Character, Integer> tFrequency = new HashMap<>();
+        Map<Character, Integer> windowFrequency = new HashMap<>();
+        for (int i = 0; i < t.length(); i++) {
+            tFrequency.put(t.charAt(i), tFrequency.getOrDefault(t.charAt(i), 0) + 1);
+        }
+        int left = 0, right = 0, uniqueCharsInT = tFrequency.size(), windowSize = 0;
+        int[] result = {-1, 0, 0};
+        while (right < s.length()) {
+            char current = s.charAt(right);
+            windowFrequency.put(current, windowFrequency.getOrDefault(current, 0) + 1);
+            if (tFrequency.containsKey(current) &&
+                tFrequency.get(current).intValue() == windowFrequency.get(current).intValue()) {
+                windowSize++;
+            }
+            while (left <= right && windowSize == uniqueCharsInT) {
+                current = s.charAt(left);
+                if (result[0] == -1 || (right - left + 1) < result[0]) {
+                    result[0] = right - left + 1;
+                    result[1] = left;
+                    result[2] = right;
+                }
+                windowFrequency.put(current, windowFrequency.get(current) - 1);
+                if (tFrequency.containsKey(current) &&
+                    tFrequency.get(current) > windowFrequency.get(current)) {
+                    windowSize--;
+                }
+                left++;
+            }
+            right++;
+        }
+        //abcddcdba
+        return result[0] == -1 ? "" : s.substring(result[1], result[2] + 1);
+    }
+
     //https://leetcode.com/problems/repeated-substring-pattern
     //ABABA
     //0,0,1,2,3

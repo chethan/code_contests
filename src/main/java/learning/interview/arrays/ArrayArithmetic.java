@@ -1,6 +1,7 @@
 package learning.interview.arrays;
 
 class ArrayArithmetic {
+
     //https://leetcode.com/problems/plus-one
     int[] plusOne(int[] digits) {
         if (digits.length == 0) {
@@ -24,24 +25,26 @@ class ArrayArithmetic {
 
     //https://leetcode.com/problems/add-binary/
     String addBinary(String a, String b) {
-        char[] input1 = a.toCharArray();
-        char[] input2 = b.toCharArray();
-        char[] result = new char[Math.max(input2.length, input1.length)];
-        int ai = input1.length - 1, bi = input2.length - 1;
-
+        int length = Math.max(a.length(), b.length());
         int carry = 0;
-        for (int i = result.length - 1; i >= 0; i--, ai--, bi--) {
-            int temp = getValue(input1, ai) + getValue(input2, bi) + carry;
-            carry = (temp >= 2) ? 1 : 0;
-            result[i] = ((temp & 1) == 1) ? '1' : '0';
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int aChar = charAt(a, a.length() - i - 1);
+            int bChar = charAt(b, b.length() - i - 1);
+            sb.insert(0, aChar ^ bChar ^ carry);
+            carry = (aChar & bChar) | (bChar & carry) | (aChar & carry);
         }
-
-        return (carry == 1) ? ('1' + new String(result)) : new String(result);
+        if (carry == 1) {
+            sb.insert(0, carry);
+        }
+        return sb.toString();
     }
 
 
-    private int getValue(char[] a, int index) {
-        return (index < 0 || index >= a.length) ? 0 : a[index] - '0';
-
+    private int charAt(String s, int index) {
+        if (index < s.length() && index >= 0) {
+            return s.charAt(index) == '1' ? 1 : 0;
+        }
+        return 0;
     }
 }
