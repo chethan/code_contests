@@ -9,6 +9,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class EditDistanceTest {
 
+    //FOOD
+    //MONEY
+
     @Test
     public void testMinDistance() throws Exception {
         EditDistance editDistance = new EditDistance();

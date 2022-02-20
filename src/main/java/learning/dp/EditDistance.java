@@ -20,10 +20,42 @@ public class EditDistance {
             for (int j = 1; j <= word2.length(); j++) {
                 int add = minDistance[i - 1][j] + 1;
                 int delete = minDistance[i][j - 1] + 1;
-                int replace = minDistance[i - 1][j - 1] + (word1.charAt(i - 1) == word2.charAt(j - 1) ? 0 : 1);
+                int replace =
+                    minDistance[i - 1][j - 1] + (word1.charAt(i - 1) == word2.charAt(j - 1) ? 0
+                        : 1);
                 minDistance[i][j] = Math.min(Math.min(add, delete), replace);
             }
         }
         return minDistance[word1.length()][word2.length()];
+    }
+
+    //https://leetcode.com/problems/one-edit-distance/
+    public boolean isOneEditDistance(String s, String t) {
+        int diff = s.length() - t.length();
+        if (Math.abs(diff) > 1) {
+            return false;
+        }
+        boolean editDone = false;
+        for (int i = 0, j = 0; i < s.length() || j < t.length(); ) {
+            char sChar = i < s.length() ? s.charAt(i) : ' ';
+            char tChar = j < t.length() ? t.charAt(j) : ' ';
+            if (sChar != tChar) {
+                if (editDone) {
+                    return false;
+                }
+                editDone = true;
+                if (diff >= 0) {
+                    i++;
+                }
+                if (diff <= 0) {
+                    j++;
+                }
+
+            } else {
+                i++;
+                j++;
+            }
+        }
+        return editDone;
     }
 }

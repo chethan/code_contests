@@ -153,6 +153,7 @@ class Substrings {
         while (right < s.length()) {
             char current = s.charAt(right);
             windowFrequency.put(current, windowFrequency.getOrDefault(current, 0) + 1);
+
             if (tFrequency.containsKey(current) &&
                 tFrequency.get(current).intValue() == windowFrequency.get(current).intValue()) {
                 windowSize++;

@@ -8,6 +8,7 @@ import java.util.List;
  * Created by Chethan on 9/19/16.
  */
 public class Permutations {
+
     //https://leetcode.com/problems/permutations/
     public List<List<Integer>> permute(int[] nums) {
         if (nums.length == 0) {
@@ -28,8 +29,8 @@ public class Permutations {
                 list.addAll(permutation);
                 finalPermutations.add(list);
             }
-
         }
+
         return finalPermutations;
     }
 
@@ -42,7 +43,6 @@ public class Permutations {
         while (index >= 0 && nums[index] >= nums[index + 1]) {
             index--;
         }
-
         if (index != -1) {
             int swapIndex = nums.length - 1;
             for (int i = index; i < nums.length - 1; i++) {
@@ -53,7 +53,6 @@ public class Permutations {
             }
             swap(nums, index, swapIndex);
         }
-
         for (int i = index + 1, j = nums.length - 1; i < j; i++, j--) {
             swap(nums, i, j);
         }
@@ -68,7 +67,6 @@ public class Permutations {
         while (index >= 0 && nums[index] <= nums[index + 1]) {
             index--;
         }
-
         if (index != -1) {
             int swapIndex = nums.length - 1;
             for (int i = index; i < nums.length - 1; i++) {
@@ -79,7 +77,6 @@ public class Permutations {
             }
             swap(nums, index, swapIndex);
         }
-
         for (int i = index + 1, j = nums.length - 1; i < j; i++, j--) {
             swap(nums, i, j);
         }

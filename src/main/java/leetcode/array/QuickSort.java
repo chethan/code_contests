@@ -1,5 +1,6 @@
 package leetcode.array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,6 +68,8 @@ public class QuickSort {
         return Arrays.copyOfRange(ints, 0, i);
     }
 
+    //794612
+    //246179
     private int quickSelectPoints(int[][] points, int left, int right) {
         int pivotIndex = left;
         double pivot = distance(points[left][0], points[left][1]);

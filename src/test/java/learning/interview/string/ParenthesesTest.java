@@ -11,6 +11,8 @@ public class ParenthesesTest {
 
     @Test
     public void testLongestValidParentheses() {
+        String[] s = "avcd; e'fgh.".replaceAll("[\\.\\?\\;\\.\\']", "").split("[\\S,]");
+
         Parentheses parentheses = new Parentheses();
         assertThat(parentheses.longestValidParentheses("((())")).isEqualTo(4);
         assertThat(parentheses.longestValidParentheses("(()()")).isEqualTo(4);

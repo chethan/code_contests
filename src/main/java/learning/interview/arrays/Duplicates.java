@@ -1,6 +1,7 @@
 package learning.interview.arrays;
 
 class Duplicates {
+
     //Invariance: 0-writeIndex(no dupilcates)
     int removeDuplicates(int[] nums) {
         if (nums.length <= 1) {
@@ -52,5 +53,21 @@ class Duplicates {
         }
         return nums;
 
+    }
+
+    //https://leetcode.com/problems/find-the-duplicate-number/
+    public int findDuplicate(int[] nums) {
+        int tortoise = nums[0];
+        int hare = nums[0];
+        do {
+            tortoise = nums[tortoise];
+            hare = nums[nums[hare]];
+        } while (tortoise != hare);
+        tortoise = nums[0];
+        while (tortoise != hare) {
+            tortoise = nums[tortoise];
+            hare = nums[hare];
+        }
+        return tortoise;
     }
 }

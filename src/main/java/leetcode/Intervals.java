@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Intervals {
 
@@ -56,18 +58,16 @@ public class Intervals {
             occupiedRooms.add(intervals[i][1]);
         }
         return occupiedRooms.size();
+
     }
 
     //https://leetcode.com/problems/meeting-rooms/
     public boolean canAttendMeetings(int[][] intervals) {
-        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
-        for (int i = 0; i < intervals.length - 1; i++) {
-            if (intervals[i][1] > intervals[i + 1][0]) {
-                return false;
-            }
-        }
-        return true;
+        Arrays.sort(intervals,Comparator.comparing(a->a[0]));
+        return IntStream.range(1,intervals.length)
+            .noneMatch(i->intervals[i-1][1] > intervals[i][0]);
     }
+
 
     //https://leetcode.com/problems/insert-interval/
     public int[][] insert(int[][] intervals, int[] newInterval) {
@@ -130,10 +130,12 @@ public class Intervals {
 
     //https://leetcode.com/problems/employee-free-time/
     public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
+        List<Interval> sortedIntervals = schedule.stream().flatMap(i -> i.stream())
+            .sorted(Comparator.comparingInt(i -> i.start)).collect(
+                Collectors.toList());
         List<Interval> res = new ArrayList<>();
-        PriorityQueue<Interval> q = new PriorityQueue<>((a, b) -> a.start - b.start);
+        PriorityQueue<Interval> q = new PriorityQueue<>(Comparator.comparingInt(a -> a.start));
         schedule.forEach(q::addAll);
-
         int end = q.poll().end;
         while (!q.isEmpty()) {
             Interval interval = q.poll();
@@ -149,46 +151,42 @@ public class Intervals {
     //https://leetcode.com/problems/employee-free-time/
     public List<Interval> employeeFreeTimeFirstApproach(List<List<Interval>> schedule) {
         List<List<Interval>> freeTime = new ArrayList<>();
-        for(List<Interval> employeeSchedule:schedule){
+        for (List<Interval> employeeSchedule : schedule) {
             List<Interval> employeeFreeTime = new ArrayList<>();
             int lastIntervalEnd = -1;
-            for(Interval interval:employeeSchedule){
-                employeeFreeTime.add(new Interval(lastIntervalEnd,interval.start));
-                lastIntervalEnd=interval.end;
+            for (Interval interval : employeeSchedule) {
+                employeeFreeTime.add(new Interval(lastIntervalEnd, interval.start));
+                lastIntervalEnd = interval.end;
             }
-            employeeFreeTime.add(new Interval(lastIntervalEnd,Integer.MAX_VALUE));
+            employeeFreeTime.add(new Interval(lastIntervalEnd, Integer.MAX_VALUE));
             freeTime.add(employeeFreeTime);
         }
-
         List<Interval> commonFreeTime = freeTime.get(0);
-        for(int i=1;i<freeTime.size();i++){
-            commonFreeTime = mergeIntervals(commonFreeTime,freeTime.get(i));
+        for (int i = 1; i < freeTime.size(); i++) {
+            commonFreeTime = mergeIntervals(commonFreeTime, freeTime.get(i));
         }
-
-        if(!commonFreeTime.isEmpty() && commonFreeTime.get(0).start==-1){
+        if (!commonFreeTime.isEmpty() && commonFreeTime.get(0).start == -1) {
             commonFreeTime.remove(0);
         }
-
-
-        if(!commonFreeTime.isEmpty() && commonFreeTime.get(commonFreeTime.size()-1).end==Integer.MAX_VALUE){
-            commonFreeTime.remove(commonFreeTime.size()-1);
+        if (!commonFreeTime.isEmpty()
+            && commonFreeTime.get(commonFreeTime.size() - 1).end == Integer.MAX_VALUE) {
+            commonFreeTime.remove(commonFreeTime.size() - 1);
         }
         return commonFreeTime;
 
     }
 
-    private List<Interval> mergeIntervals(List<Interval> interval1,List<Interval> interval2){
+    private List<Interval> mergeIntervals(List<Interval> interval1, List<Interval> interval2) {
         List<Interval> mergedIntervals = new ArrayList<>();
-        for(int i=0,j=0;i < interval1.size() && j < interval2.size() ; ){
-            int low = Math.max(interval1.get(i).start,interval2.get(j).start);
-            int high = Math.min(interval1.get(i).end,interval2.get(j).end);
-            if(low<high){
-                mergedIntervals.add(new Interval(low,high));
+        for (int i = 0, j = 0; i < interval1.size() && j < interval2.size(); ) {
+            int low = Math.max(interval1.get(i).start, interval2.get(j).start);
+            int high = Math.min(interval1.get(i).end, interval2.get(j).end);
+            if (low < high) {
+                mergedIntervals.add(new Interval(low, high));
             }
-            if(interval1.get(i).end < interval2.get(j).end){
+            if (interval1.get(i).end < interval2.get(j).end) {
                 i++;
-            }
-            else{
+            } else {
                 j++;
             }
         }
@@ -200,7 +198,6 @@ public class Intervals {
         if (points.length == 0) {
             return 0;
         }
-
         Arrays.sort(points, Comparator.comparingInt((int[] a) -> a[0]));
         int countOfArrows = 1;
         int end = points[0][1];
@@ -213,6 +210,22 @@ public class Intervals {
             }
         }
         return countOfArrows;
+    }
+
+    //https://leetcode.com/problems/remove-covered-intervals/
+    public int removeCoveredIntervals(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> a[0] == b[0] ? b[1] - a[1] : a[0] - b[0]);
+        int count = 1;
+        int[] previous = intervals[0];
+        for (int i = 1; i < intervals.length; i++) {
+            int[] current = intervals[i];
+            if (previous[0] <= current[0] && previous[1] >= current[1]) {
+                continue;
+            }
+            previous = current;
+            count++;
+        }
+        return count;
     }
 
 

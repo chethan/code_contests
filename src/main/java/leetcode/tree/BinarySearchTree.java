@@ -1,7 +1,9 @@
 package leetcode.tree;
 
 import ds.TreeNode;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 import leetcode.Pair;
 
@@ -77,6 +79,35 @@ public class BinarySearchTree {
             loopNode = target > loopNode.val ? loopNode.right : loopNode.left;
         }
         return returnValue;
+    }
+
+    //https://leetcode.com/problems/inorder-successor-in-bst/
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        TreeNode candidate = null;
+        while (root != null) {
+            if (p.val >= root.val) {
+                root = root.right;
+            } else {
+                candidate = root;
+                root = root.left;
+            }
+        }
+        return candidate;
+    }
+
+    //https://leetcode.com/problems/inorder-successor-in-bst-ii/
+    public TreeParentNode inorderSuccessor(TreeParentNode node) {
+        if (node.right != null) {
+            node = node.right;
+            while (node.left != null) {
+                node = node.left;
+            }
+            return node;
+        }
+        while (node.parent != null && node == node.parent.right) {
+            node = node.parent;
+        }
+        return node.parent;
     }
 
     //https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/
