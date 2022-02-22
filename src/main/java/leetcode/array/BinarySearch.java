@@ -19,7 +19,6 @@ public class BinarySearch {
             if (nums[mid - 1] > nums[mid]) {
                 return nums[mid];
             }
-
             if (nums[mid] > nums[0]) {
                 start = mid + 1;
             } else {
@@ -62,7 +61,6 @@ public class BinarySearch {
         if (leftIndex == nums.length || nums[leftIndex] != target) {
             return targetRange;
         }
-
         targetRange[0] = leftIndex;
         targetRange[1] = extremeInsertionIndex(nums, target, false) - 1;
         return targetRange;
@@ -93,25 +91,20 @@ public class BinarySearch {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int leftLength = nums1.length;
         int rightLength = nums2.length;
-
         if (leftLength > rightLength) {
             return findMedianSortedArrays(nums2, nums1);
         }
-
         int mergedLength = (leftLength + rightLength - 1) / 2;
         int l = 0, r = Math.min(mergedLength, leftLength);
-
         while (l < r) {
             int midl = (l + r) / 2;
             int midr = mergedLength - midl;
-
             if (nums1[midl] < nums2[midr]) {
                 l = midl + 1;
             } else {
                 r = midl;
             }
         }
-
         int maxLeftNums1 = l <= 0 ? Integer.MIN_VALUE : nums1[l - 1];
         int maxLeftNums2 = (mergedLength - l) < 0 ? Integer.MIN_VALUE : nums2[mergedLength - l];
         // Check if we have found the match
@@ -143,5 +136,96 @@ public class BinarySearch {
             }
         }
         return lo;
+    }
+
+    //https://leetcode.com/problems/search-a-2d-matrix-ii/
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0) {
+            return false;
+        }
+        int row = matrix.length - 1, col = 0;
+        while (row < matrix.length && row >= 0 && col >= 0 && col < matrix[0].length) {
+            if (matrix[row][col] == target) {
+                return true;
+            }
+            if (target > matrix[row][col]) {
+                col++;
+            } else {
+                row--;
+            }
+        }
+        return false;
+    }
+
+    //https://leetcode.com/problems/search-a-2d-matrix/
+    public boolean searchMatrixWithSortedElements(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0) {
+            return false;
+        }
+        int lo = 0, hi = (matrix.length * matrix[0].length) - 1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            int row = mid / matrix[0].length;
+            int col = (mid % matrix[0].length);
+            if (matrix[row][col] == target) {
+                return true;
+            }
+            if (target > matrix[row][col]) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        return false;
+    }
+
+
+    //https://leetcode.com/problems/fixed-point/
+    public int fixedPoint(int[] arr) {
+        int lo = 0, hi = arr.length - 1;
+        int answer = -1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (arr[mid] == mid) {
+                answer = mid;
+                hi = mid - 1;
+            }
+            if (mid > arr[mid]) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        return answer;
+    }
+
+    //https://leetcode.com/problems/single-element-in-a-sorted-array/
+    public int singleNonDuplicate(int[] nums) {
+        if (nums.length % 2 == 0) {
+            return -1;
+        }
+        int lo = 0, hi = nums.length - 1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if ((mid + 1) <= hi && nums[mid] == nums[mid + 1]) {
+                int leftPartLength = mid - lo;
+                if (leftPartLength % 2 == 1) {
+                    hi = mid - 1;
+                } else {
+                    lo = mid + 2;
+                }
+            } else if ((mid - 1) >= lo && nums[mid - 1] == nums[mid]) {
+                int leftPartLength = mid - lo - 1;
+                if (leftPartLength % 2 == 1) {
+                    hi = mid - 2;
+                } else {
+                    lo = mid + 1;
+                }
+
+            } else {
+                return nums[mid];
+            }
+        }
+        return -1;
     }
 }
