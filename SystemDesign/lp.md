@@ -11,7 +11,9 @@
 # Hire and Develop the Best
  - Every hire and promotion decision made by leaders raises the performance level. Leaders recognize talent and are willing to support them in their development. They invest their time into coaching and mentoring others.
 # Insist on the Highest Standards 
-- Leaders are continually raising the bar of their standards and motivate their teams to deliver high-quality services, products, and processes. Leaders make sure that problems are fixed and defects never get sent down the line.
+- Leaders are continually raising the bar of their standards and motivate their teams 
+to deliver high-quality services, products, and processes. 
+Leaders make sure that problems are fixed and defects never get sent down the line.
 # Think Big 
 - Leaders think differently and envisage a bold direction that inspires outstanding results. They also expertly partake in calculated risk-taking. They think outside of the box to serve customers and achieve a significant impact.
 # Bias for Action 

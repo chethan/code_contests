@@ -125,7 +125,7 @@ class Substrings {
             String substring = s.substring(0, end);
             boolean matches = true;
             for (int i = end; i < s.length(); i += end) {
-                if (!s.substring(i, i + end > s.length() ? s.length() : i + end)
+                if (!s.substring(i, Math.min(i + end, s.length()))
                     .equals(substring)) {
                     matches = false;
                     break;

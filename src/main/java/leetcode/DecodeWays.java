@@ -6,6 +6,7 @@ package leetcode;
 //https://leetcode.com/problems/decode-ways/
 public class DecodeWays {
     public int numDecodings(String s) {
+        //dp[i] indicates number of ways you can decode string of length 0 to i-1
         if (s.length() == 0) return 0;
         int[] dp = new int[s.length() + 1];
         dp[0] = dp[1] = Character.getNumericValue(s.charAt(0)) > 0 ? 1 : 0;
