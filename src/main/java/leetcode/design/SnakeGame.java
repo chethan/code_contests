@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+
+//https://leetcode.com/problems/design-snake-game/
 public class SnakeGame {
 
     private static final Map<String, Position> directionMap;
@@ -93,7 +95,3 @@ public class SnakeGame {
         }
     }
 }
-/**
- * Your SnakeGame object will be instantiated and called as such: SnakeGame obj = new
- * SnakeGame(width, height, food); int param_1 = obj.move(direction);
- */

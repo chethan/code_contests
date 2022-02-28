@@ -8,23 +8,21 @@ class StringSearch {
     //brute force
     //https://leetcode.com/problems/implement-strstr/
     int strStr(String haystack, String needle) {
-        if (needle == null || needle.length() == 0 || haystack == null) return 0;
-
+        if (needle == null || needle.length() == 0 || haystack == null) {
+            return 0;
+        }
         for (int i = 0; i <= (haystack.length() - needle.length()); i++) {
             int matchingIndex = i;
-
             for (int j = 0; j < needle.length(); j++) {
                 if (haystack.charAt(i + j) != needle.charAt(j)) {
                     matchingIndex = -1;
                     break;
                 }
             }
-
             if (matchingIndex >= 0) {
                 return matchingIndex;
             }
         }
-
         return -1;
     }
 
@@ -32,14 +30,16 @@ class StringSearch {
     //Using Robin Karp
     //https://leetcode.com/problems/implement-strstr/
     int strStrRobinKarp(String haystack, String needle) {
-        if (needle == null || needle.length() == 0 || haystack == null) return 0;
-        if (needle.length() > haystack.length()) return -1;
-
+        if (needle == null || needle.length() == 0 || haystack == null) {
+            return 0;
+        }
+        if (needle.length() > haystack.length()) {
+            return -1;
+        }
         int rm = 1;
         for (int i = 0; i < needle.length() - 1; ++i) {
             rm = rm * RADIX % MOD;
         }
-
         long needleHash = getHash(needle);
         long haystackHash = getHash(haystack.substring(0, needle.length()));
         for (int i = 0; i <= (haystack.length() - needle.length()); i++) {
@@ -48,8 +48,8 @@ class StringSearch {
             }
             if (i + needle.length() < haystack.length()) {
                 haystackHash = deriveHash(haystackHash,
-                        haystack.charAt(i),
-                        haystack.charAt(i + needle.length()), rm);
+                    haystack.charAt(i),
+                    haystack.charAt(i + needle.length()), rm);
             }
         }
         return -1;
@@ -58,15 +58,16 @@ class StringSearch {
 
     //https://leetcode.com/problems/repeated-string-match
     int repeatedStringMatch(String A, String B) {
-        if (A == null || A.length() == 0 || B == null) return 0;
-
+        if (A == null || A.length() == 0 || B == null) {
+            return 0;
+        }
         int rm = 1;
         for (int i = 0; i < B.length() - 1; ++i) {
             rm = rm * RADIX % MOD;
         }
-
         long needleHash = getHash(B), currentHash = 0;
-        for (int count = 0, index = 0, repeatCount = 1; count <= B.length() * 2 || repeatCount < 3; index++, count++) {
+        for (int count = 0, index = 0, repeatCount = 1; count <= B.length() * 2 || repeatCount < 3;
+            index++, count++) {
             if (index == A.length()) {
                 repeatCount++;
                 index = 0;
@@ -75,14 +76,13 @@ class StringSearch {
                 currentHash = getHash(currentHash, A.charAt(index));
             } else {
                 currentHash = deriveHash(currentHash,
-                        A.charAt((count - B.length()) % A.length()), A.charAt(index), rm);
+                    A.charAt((count - B.length()) % A.length()), A.charAt(index), rm);
             }
-
-            if (currentHash == needleHash && checkEquality(generateHaystack(A, repeatCount), B, count - B.length()+1)) {
+            if (currentHash == needleHash && checkEquality(generateHaystack(A, repeatCount), B,
+                count - B.length() + 1)) {
                 return repeatCount;
             }
         }
-
         return -1;
 
     }
@@ -114,9 +114,13 @@ class StringSearch {
     }
 
     private boolean checkEquality(String haystack, String needle, int startIndex) {
-        if(haystack.length()<needle.length()) return false;
+        if (haystack.length() < needle.length()) {
+            return false;
+        }
         for (int i = 0; i < needle.length(); i++) {
-            if (haystack.charAt(i + startIndex) != needle.charAt(i)) return false;
+            if (haystack.charAt(i + startIndex) != needle.charAt(i)) {
+                return false;
+            }
         }
         return true;
     }
