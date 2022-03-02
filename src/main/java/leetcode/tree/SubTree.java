@@ -34,6 +34,51 @@ public class SubTree {
         return compute(root).maxAverage;
     }
 
+    //https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/
+    //https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/
+    public TreeNode subtreeWithAllDeepest(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        return helper(root, 1).node;
+    }
+
+    TreeDepth helper(TreeNode node, int depth) {
+        if (node == null) {
+            return null;
+        }
+        TreeDepth left = helper(node.left, depth + 1);
+        TreeDepth right = helper(node.right, depth + 1);
+        //leaf node
+        if (left == null && right == null) {
+            return new TreeDepth(node, depth);
+        }
+        //has both children
+        if (left != null && right != null) {
+            if (left.depth > right.depth) {
+                return left;
+            } else if (left.depth < right.depth) {
+                return right;
+            }
+            return new TreeDepth(node, left.depth);
+        }
+        //has one of the children
+        return left != null ? left : right;
+
+    }
+
+    private static class TreeDepth {
+
+        int depth;
+        TreeNode node;
+
+        TreeDepth(TreeNode node, int depth) {
+            this.node = node;
+            this.depth = depth;
+        }
+
+    }
+
     private static class TreeMeta {
 
         double sum;

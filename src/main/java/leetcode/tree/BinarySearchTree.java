@@ -1,9 +1,7 @@
 package leetcode.tree;
 
 import ds.TreeNode;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Stack;
 import leetcode.Pair;
 
@@ -108,6 +106,24 @@ public class BinarySearchTree {
             node = node.parent;
         }
         return node.parent;
+    }
+
+    //https://leetcode.com/problems/range-sum-of-bst/
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        if (root == null) {
+            return 0;
+        }
+        int result = 0;
+        if (root.val >= low && root.val <= high) {
+            result += root.val;
+        }
+        if (root.val > low) {
+            result += rangeSumBST(root.left, low, high);
+        }
+        if (root.val < high) {
+            result += rangeSumBST(root.right, low, high);
+        }
+        return result;
     }
 
     //https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/

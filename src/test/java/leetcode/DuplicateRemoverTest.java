@@ -1,5 +1,6 @@
 package leetcode;
 
+import leetcode.array.DuplicateRemover;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
