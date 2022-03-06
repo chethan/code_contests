@@ -1,5 +1,6 @@
 package learning.interview;
 
+import leetcode.array.ChampagneFountain;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.StrictAssertions.assertThat;
