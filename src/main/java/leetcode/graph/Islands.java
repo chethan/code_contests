@@ -1,7 +1,11 @@
 package leetcode.graph;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -98,6 +102,120 @@ public class Islands {
         return -1;
     }
 
+    //https://leetcode.com/problems/count-sub-islands/
+    public int countSubIslands(int[][] grid1, int[][] grid2) {
+        //remove all the islands not matching the grid1 island in grid2
+        int row = grid2.length, col = grid2[0].length;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid1[i][j] == 0 && grid2[i][j] == 1) {
+                    dfsForSubIslands(i, j, grid2);
+                }
+            }
+        }
+        //count the islands in grid2
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid2[i][j] == 1) {
+                    dfsForSubIslands(i, j, grid2);
+                    count++;
+                }
+            }
+        }
+        return count;
+
+    }
+
+    //https://leetcode.com/problems/making-a-large-island/
+    //Time: O(N^2)
+    //Space: O(N^2)
+    public int largestIsland(int[][] grid) {
+        Map<Integer, Integer> areaMap = new HashMap<>();
+        int islandIndex = 2, maxArea = 0;
+        for (int r = 0; r < grid.length; r++) {
+            for (int c = 0; c < grid[0].length; c++) {
+                if (grid[r][c] == 1) {
+                    int area = dfs(r, c, grid, islandIndex);
+                    areaMap.put(islandIndex, area);
+                    maxArea = Math.max(area, maxArea);
+                    islandIndex++;
+                }
+            }
+        }
+        for (int r = 0; r < grid.length; r++) {
+            for (int c = 0; c < grid[0].length; c++) {
+                if (grid[r][c] == 0) {
+                    int area = sumOfNeighbourArea(r, c, areaMap, grid);
+                    maxArea = Math.max(area, maxArea);
+                }
+            }
+        }
+        return maxArea;
+
+
+    }
+
+    void dfsForSubIslands(int row, int col, int[][] grid2) {
+        if (grid2[row][col] == 0) {
+            return;
+        }
+        grid2[row][col] = 0;
+        for (int[] direction : directions) {
+            int newX = row + direction[0];
+            int newY = col + direction[1];
+            if (newX >= 0 && newY >= 0 && newX < grid2.length && newY < grid2[0].length) {
+                dfsForSubIslands(newX, newY, grid2);
+            }
+        }
+    }
+
+    private int sumOfNeighbourArea(int r, int c, Map<Integer, Integer> areaMap, int[][] grid) {
+        Set<Integer> seen = new HashSet<>();
+        for (int[] n : validNeighbours(r, c, grid)) {
+            int newR = n[0];
+            int newC = n[1];
+            if (newR >= 0 && newC >= 0 && newR < grid.length && newC < grid[0].length &&
+                grid[newR][newC] > 1) {
+                seen.add(grid[newR][newC]);
+            }
+        }
+        int area = 1;
+        for (int index : seen) {
+            area += areaMap.get(index);
+        }
+        return area;
+    }
+
+    private int dfs(int r, int c, int[][] grid, int islandIndex) {
+        if (grid[r][c] > 1) {
+            return 0;
+        }
+        grid[r][c] = islandIndex;
+        int count = 1;
+        for (int[] n : validNeighbours(r, c, grid)) {
+            int newR = n[0];
+            int newC = n[1];
+            if (grid[newR][newC] == 1) {
+                count += dfs(newR, newC, grid, islandIndex);
+            }
+        }
+        return count;
+
+    }
+
+    private List<int[]> validNeighbours(int r, int c, int[][] grid) {
+        List<int[]> neighbours = new ArrayList<>();
+        for (int[] direction : directions) {
+            int newR = r + direction[0];
+            int newC = c + direction[1];
+            if (newR >= 0 && newC >= 0 && newR < grid.length && newC < grid[0].length) {
+                neighbours.add(new int[]{newR, newC});
+            }
+        }
+        return neighbours;
+    }
+
     private void dfs(char[][] grid, int row, int col, Set<String> visited) {
         visited.add(row + "_" + col);
         for (int[] direction : directions) {
@@ -165,7 +283,6 @@ public class Islands {
         return island;
     }
 
-
     private void islandNodes(int[][] grid, int row, int col, Queue<int[]> island) {
         for (int[] direction : directions) {
             int newRow = row + direction[0];
@@ -177,45 +294,6 @@ public class Islands {
                 grid[newRow][newCol] = 2;
                 island.offer(new int[]{newRow, newCol});
                 islandNodes(grid, newRow, newCol, island);
-            }
-        }
-    }
-
-    //https://leetcode.com/problems/count-sub-islands/
-    public int countSubIslands(int[][] grid1, int[][] grid2) {
-        //remove all the islands not matching the grid1 island in grid2
-        int row = grid2.length, col = grid2[0].length;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (grid1[i][j] == 0 && grid2[i][j] == 1) {
-                    dfsForSubIslands(i, j, grid2);
-                }
-            }
-        }
-        //count the islands in grid2
-        int count = 0;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (grid2[i][j] == 1) {
-                    dfsForSubIslands(i, j, grid2);
-                    count++;
-                }
-            }
-        }
-        return count;
-
-    }
-
-    void dfsForSubIslands(int row, int col, int[][] grid2) {
-        if (grid2[row][col] == 0) {
-            return;
-        }
-        grid2[row][col] = 0;
-        for (int[] direction : directions) {
-            int newX = row + direction[0];
-            int newY = col + direction[1];
-            if (newX >= 0 && newY >= 0 && newX < grid2.length && newY < grid2[0].length) {
-                dfsForSubIslands(newX, newY, grid2);
             }
         }
     }
